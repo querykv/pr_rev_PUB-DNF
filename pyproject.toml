@@ -1,0 +1,43 @@
+[project]
+name = "pr-review"
+version = "0.2.0"
+description = "Security-focused PR review tool — deterministic detectors (M0-M2); the agentic families and verifier are designed and not built"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2",
+    "typer>=0.12",
+    "pyyaml>=6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# `change/astdiff.py` imports tree-sitter directly (it compares two strings and
+# needs no ParseCache). Optional: without it, formatting-only detection falls
+# back to the comment heuristic and declines rather than dropping. Phase 1
+# profiling needs the same grammars via `pip install -e cap_engine/'[tree-sitter]'`.
+tree-sitter = [
+    "tree-sitter>=0.24",
+    "tree-sitter-python>=0.23",
+]
+
+[project.scripts]
+pr-review = "pr_review.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pr_review*"]
+
+[tool.setuptools.package-data]
+# Catalogs and prompts are data resolved by path at runtime, not code. Without
+# this they are absent from a wheel: profiling degrades silently and the
+# workflow fails to load.
+pr_review = [
+    "profile/patterns/*.yaml",
+    "prompts/personas/*.md",
+    "prompts/tasks/*.md",
+    "prompts/templates/*.md",
+    "prompts/workflows/*.yaml",
+]

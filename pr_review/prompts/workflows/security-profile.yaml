@@ -1,0 +1,73 @@
+# The Phase-1 security-profile workflow (phase-1-profiling.md §5).
+#
+# Each step runs a full CAP orchestration loop (explore -> plan -> infer ->
+# synthesize), so a step is expensive. phase-1 §5 lists eleven template
+# questions; several are one cheap read of the same files, so they are merged
+# into seven steps here. The eleven questions are all still answered — see the
+# `covers:` note on each step. Splitting them back out would multiply loops
+# without adding information, which is the opposite of what Phase 1 is for.
+#
+# `depends_on` threads a step's summary and structured findings into the
+# dependent step's planner prompt, so later steps do not re-derive earlier
+# answers (writeup §9, "cross-task knowledge injection").
+
+name: security-profile
+description: >
+  Build the amortized security profile of a Python repository: architecture,
+  I/O surface, roles, authentication, authorization, and the access-control
+  matrix. Deterministic extraction has already supplied every endpoint, guard,
+  source, sink and sensitive field; these steps judge them.
+
+steps:
+  - name: overview
+    task_name: profile-overview
+    report_template: profile-overview
+    # covers: description/purpose, tech stack, cloud services
+
+  - name: architecture
+    task_name: profile-architecture
+    report_template: profile-architecture
+    depends_on: [overview]
+    # covers: components (role, location, access control, data sensitivity),
+    #         architecture (patterns, data flow, integration)
+
+  - name: io-channels
+    task_name: profile-io-channels
+    report_template: profile-io-channels
+    depends_on: [architecture]
+    # covers: I/O channels, code-flow (channel <-> file-path maps)
+
+  - name: roles-and-checks
+    task_name: profile-roles-and-checks
+    report_template: profile-roles-and-checks
+    depends_on: [architecture]
+    # covers: roles & permission checks, and where they live
+
+  - name: authentication
+    task_name: profile-authentication
+    report_template: profile-authentication
+    depends_on: [roles-and-checks]
+    # covers: authentication (methods, sessions, MFA)
+
+  # The flagship. `csv_aggregation` collects `endpoint_csv_rows` from every
+  # worker and merges them into one CSV with NO model call (writeup §7) — the
+  # access-control matrix is assembled deterministically, so the tokens are
+  # spent on judging enforcement rather than on formatting a table.
+  - name: authorization
+    task_name: profile-authorization
+    report_template: profile-authorization
+    depends_on: [roles-and-checks, io-channels]
+    csv_aggregation: [endpoint_csv_rows]
+    output_files: [access-control-matrix.csv]
+    # covers: authorization (RBAC/ABAC, resource-level controls)
+
+  - name: data-sensitivity
+    task_name: profile-data-sensitivity
+    report_template: profile-data-sensitivity
+    depends_on: [architecture, io-channels]
+    # covers: data sensitivity classes, exposure through I/O channels
+
+synthesis:
+  report_template: profile-synthesis
+  output_files: [project-profile.json]
+  # covers: notes (external deps, extra considerations, coverage gaps)

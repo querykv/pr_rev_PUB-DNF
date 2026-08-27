@@ -1,0 +1,365 @@
+# Python framework security catalog (phase-1-profiling.md §4, §9).
+#
+# DATA, NOT CODE. `profile/cpg.py` seeds the security overlay from this file and
+# `profile/promote.py` uses the `endpoints`/`auth` blocks for framework-aware
+# extraction. Adding a framework should never require touching Python.
+#
+# That claim used to be false for the most important extraction in the file:
+# `endpoints.decorators`, `method_kwarg`, `path_arg`, `route_table_calls` and
+# `method_from_decorator` were all declared and none was read, while route
+# recognition ran off a hardcoded verb set in promote.py (errata §14.24). The
+# keys that describe what the code does are now read; the keys that described
+# machinery nobody built are deleted, with the reason recorded at the code that
+# replaced each one. `tests/test_m1_schemas.py` fails on any key here that no
+# module reads and is not listed as deliberately inert, so this cannot rot back.
+#
+# MATCHING CONTRACT
+#   decorators : matched against Symbol.decorators (raw text) by dotted suffix,
+#                so `@app.route` matches `@app.route`, `@bp.route`, `@blueprint.route`.
+#   calls      : matched against call-graph callees by dotted suffix, so
+#                `cursor.execute` matches `conn.cursor().execute` and `cur.execute`.
+#   exact_calls: the same, with the suffix rule OFF — `exec` matches `exec(...)`
+#                and not `session.exec(...)`. For patterns whose receiver turned
+#                out to be unbounded in practice; the real dotted spellings are
+#                then listed here too, individually (`sa.text`). Which patterns
+#                need this is a measurement, recorded at each one, NOT a rule
+#                about segment counts: `urlparse` and `bindparam` are also
+#                single-segment and their dotted forms are correct.
+#   attributes : matched against attribute access chains (request.args -> ...).
+#   kwargs     : matched *inside a call's argument list* rather than by name —
+#                the value is the keyword to look for, and what it guards is
+#                decided by where the call sits (`auth.router_kwarg` on a router
+#                construction, `auth.route_decorator_kwarg` on the route
+#                decorator itself). The only mode whose key names an argument.
+#
+# All values are STARTER patterns, tuned by the benchmark (benchmark.md) the same
+# way the drift thresholds are. Recall matters more than precision here: these
+# only *seed* candidates, and Phase 3c verifies reachability before anything is
+# reported (phase-1 §10, "taint-lite false edges").
+#
+# That argument covers `sources` and `sinks` and does NOT cover `sanitizers`.
+# `detect/structural.py` drops any path with `sanitized_by` outright, so a loose
+# sanitizer deletes a real finding, silently, with no verifier downstream to
+# restore it. Looseness there is not a recall-favouring trade; it is a recall
+# loss. `escape` is the case that made this concrete — see the block below.
+
+version: 1
+language: python
+
+# ---------------------------------------------------------------------------
+# Frameworks — endpoint surface + authn/authz surface
+# ---------------------------------------------------------------------------
+frameworks:
+
+  flask:
+    detect: [flask, quart]
+    endpoints:
+      # Receivers are spelled out for readability; only the suffix is matched
+      # (see MATCHING CONTRACT), which is what lets `@bp.get` and `@v1.get` hit
+      # without this list naming every object a router gets bound to.
+      #
+      # `add_url_rule` is deliberately absent: it is a *call*, not a decorator,
+      # so it could never match here. Registrations made that way are unread —
+      # the same deferral as Django's route table, argued at promote.py's
+      # `_extract_class_endpoints`.
+      decorators: [app.route, bp.route, blueprint.route, app.get, app.post, app.put,
+                   app.patch, app.delete]
+      # Flask carries the verb in a `methods=[...]` kwarg when using `.route`.
+      method_kwarg: methods
+    auth:
+      decorators: [login_required, fresh_login_required, roles_required,
+                   roles_accepted, permissions_required, jwt_required,
+                   auth.login_required]
+      # Explicitly opens an endpoint — a *removal* of one of these is a signal,
+      # and so is its presence on a sensitive route.
+      opt_out_decorators: [login_exempt, csrf.exempt]
+    sources:
+      attributes: [request.args, request.form, request.json, request.values,
+                   request.data, request.files, request.headers, request.cookies,
+                   request.view_args, request.get_json]
+
+  fastapi:
+    detect: [fastapi, starlette]
+    endpoints:
+      decorators: [app.get, app.post, app.put, app.patch, app.delete, app.head,
+                   app.options, router.get, router.post, router.put, router.patch,
+                   router.delete, api_router.get, api_router.post]
+      # No `method_from_decorator` flag: falling back to the decorator's own verb
+      # is what promote.py does for *every* framework, because detection is
+      # per-file and a file can import both Flask and FastAPI.
+    auth:
+      # FastAPI expresses authz as injected dependencies, not decorators — the
+      # guard lives in the signature, which is why promote.py has to read params
+      # and not just decorators (phase-1 §3).
+      dependency_calls: [Depends, Security]
+      dependency_names: [get_current_user, get_current_active_user, require_scopes,
+                         require_roles, oauth2_scheme, api_key_header, HTTPBearer,
+                         HTTPBasic]
+      # A router-level guard, declared where the router is *built*:
+      # `router = APIRouter(dependencies=[Depends(verify)])`. Read by
+      # `promote._router_guards`, which maps the assigned name to its guards and
+      # attributes them to endpoints whose route decorator has that name as its
+      # receiver.
+      #
+      # SAME-FILE ONLY, and `include_router(r, dependencies=[...])` is
+      # deliberately not read: the router is built in one file and included in
+      # another, and a cross-file edge is a `CPG.splice_violations()` hit that
+      # forces a full rebuild, while the incremental path re-derives from a
+      # cache holding only the changed files and would silently find nothing.
+      # The two paths must never disagree about what an endpoint is
+      # (`promote.extract_frameworks`). OPEN_ITEMS.md §8.
+      #
+      # This key's old comment claimed it inflated missing-authz. It does not —
+      # all 11 of those findings are django-ninja endpoints in one wagtail file
+      # with no `dependencies=` anywhere in it. Measured, OPEN_ITEMS.md §3.
+      router_kwarg: dependencies
+      # The same keyword one level down: on the route decorator itself,
+      # `@router.post("/x", dependencies=[Depends(verify)])`. A distinct
+      # mechanism from `router_kwarg` — the guard is on the route, not on the
+      # object the route is bound to — so it is a distinct key, and each is
+      # separately falsifiable by the coverage test.
+      #
+      # Needs no tree walk: `Symbol.decorators` carries the full decorator text,
+      # arguments and all. It is also where the corpus's real production usage
+      # is, which `router_kwarg` (fastapi's own test suite, 308 sites) is not.
+      route_decorator_kwarg: dependencies
+    sources:
+      attributes: [request.query_params, request.path_params, request.headers,
+                   request.cookies, request.body, request.json, request.form]
+      # Parameter *annotations* that mark a value as request-derived.
+      # NOT READ: cpg.py seeds taint from attribute chains and calls, not from
+      # annotations, so these are unseeded sources. A real gap — OPEN_ITEMS.md §3.
+      param_annotations: [Body, Query, Path, Header, Cookie, Form, File, UploadFile]
+
+  django:
+    detect: [django, rest_framework]
+    endpoints:
+      # No `decorators`: a Django route lives in a `urls.py` table, not on the
+      # view, and resolving one to its view symbol needs call-argument extraction
+      # the ParseCache does not provide. The route is left empty rather than
+      # guessed — reasoning at promote.py's `_extract_class_endpoints`. The keys
+      # that used to describe that unbuilt resolver (`route_table_calls`,
+      # `route_files`) are gone; a catalog key nothing reads is worse than none.
+      view_bases: [View, TemplateView, ListView, DetailView, CreateView,
+                   UpdateView, DeleteView, APIView, GenericAPIView, ViewSet,
+                   ModelViewSet, ReadOnlyModelViewSet]
+    auth:
+      decorators: [login_required, permission_required, user_passes_test,
+                   staff_member_required, api_view]
+      mixins: [LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin]
+      # DRF: class attribute, not a decorator.
+      class_attributes: [permission_classes, authentication_classes]
+      permission_classes:
+        enforcing: [IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly,
+                    DjangoModelPermissions, DjangoObjectPermissions]
+        # AllowAny is an explicit opt-out. Its *addition* to an existing view is
+        # one of the highest-signal single-line changes in a Python PR.
+        opening: [AllowAny]
+      middleware: [AuthenticationMiddleware, SessionMiddleware, CsrfViewMiddleware]
+    sources:
+      attributes: [request.GET, request.POST, request.body, request.META,
+                   request.COOKIES, request.FILES, request.data, request.query_params]
+
+# ---------------------------------------------------------------------------
+# Framework-agnostic sources (untrusted input)
+# ---------------------------------------------------------------------------
+sources:
+  environment:
+    calls: [os.getenv, os.environ.get, environ.get]
+    trust: low        # attacker-controlled only in specific deployments
+  filesystem:
+    calls: [open, Path.read_text, Path.read_bytes, json.load, csv.reader]
+    trust: medium
+  network:
+    calls: [socket.recv, requests.get, httpx.get, urlopen]
+    trust: high       # response bodies are attacker-influenced
+  message_queue:
+    # `poll` and `consume` are exact. Neither corpus contains a message queue,
+    # and under the suffix rule both matched something else entirely: all 27
+    # `poll` nodes were `Popen.poll()` (`execution_process`, `proc`, `process`,
+    # `self.server_process`) — a process liveness check read as untrusted input
+    # at trust:high — and 15 of the 27 `consume` nodes were `self.consume`.
+    #
+    # Exact rather than deleted because a real consumer loop is usually
+    # `poll(...)`/`consume(...)` on an imported client, and there is no corpus
+    # evidence either way: nothing here exercises this group at all. The dotted
+    # spellings a real broker uses — `consumer.poll`, `channel.basic_consume` —
+    # want adding from evidence, not from memory.
+    calls: [basic_consume, receive_messages]
+    exact_calls: [consume, poll]
+    trust: high
+  cli:
+    attributes: [sys.argv]
+    trust: low
+
+# ---------------------------------------------------------------------------
+# Sinks, grouped by sink_class. A sanitizer only neutralizes its own class —
+# shlex.quote does nothing for an SQL sink.
+# ---------------------------------------------------------------------------
+sinks:
+  sql:
+    calls: [cursor.execute, cursor.executemany, cursor.executescript,
+            connection.execute, session.execute, engine.execute,
+            objects.raw, objects.extra, RawSQL]
+    # `text` is SQLAlchemy's raw-SQL constructor and moved here 2026-08-09.
+    # Under the suffix rule it also matched `response.text`, `request.text`,
+    # `part.text`, `clipboard.text` and Qt's `*_lineedit.text` — 5 of the
+    # labelled corpus's reported SQL findings were HTTP response bodies.
+    #
+    # The dotted spelling has to be enumerated because dotted-suffix cannot
+    # resolve an alias: `import sqlalchemy as sa` makes every real call site
+    # `sa.text`, and `sa.text` does not end with `.sqlalchemy.text`. 1,557 of
+    # the 1,632 `text` nodes in the cached CPGs are exactly that, so listing
+    # the alias is what keeps this a precision fix instead of a recall cut.
+    # Any other alias is missed until someone adds it — the honest cost.
+    exact_calls: [text, sa.text, sqlalchemy.text]
+    cwe: [CWE-89]
+  command:
+    calls: [subprocess.run, subprocess.call, subprocess.check_call,
+            subprocess.check_output, subprocess.Popen, os.system, os.popen,
+            os.execv, os.spawnv, pty.spawn]
+    # shell=True is what turns most of these from safe to catastrophic.
+    danger_kwarg: {shell: true}
+    cwe: [CWE-78]
+  code_exec:
+    # `compile` is deliberately absent. It is a compiler, not an executor: a code
+    # object does nothing until `eval` or `exec` runs it, and both are listed
+    # here, so removing it costs no reachable coverage. Keeping it cost real
+    # precision — patterns match by dotted suffix, so the bare builtin `compile`
+    # also matched `re.compile`, which is ubiquitous and harmless
+    # (`benchmark/results/2026-08-07/analysis.md` §3).
+    #
+    # That paragraph was right and the one that used to follow it was wrong.
+    # It read: "`eval` and `exec` stay single-segment on purpose: unlike
+    # `.compile`, a dotted `.eval` is usually still evaluation (`pandas.eval`,
+    # `numexpr.eval`), so the suffix match is earning its keep there."
+    #
+    # Measured 2026-08-09 over the 41 cached CPGs: **not one** `pandas.eval` or
+    # `numexpr.eval` node exists. All 340 `eval` nodes are `c.eval` (199),
+    # `cs.eval` (125) and similar; all 20 `exec` nodes are SQLModel's
+    # `session.exec`, which is a SQL call, not code execution. In the labelled
+    # corpus the same rule produced 40 of the 42 reported INJ-CODE-EXEC
+    # findings off `self.exec`, against a `def exec(self, ...)` the scanned
+    # project defines itself (`penelope.py:2625`).
+    #
+    # So `.compile` and `.eval` were never different; the first was checked and
+    # the second was reasoned about. Both are now exact.
+    # `ast.literal_eval` still does not match — the dot boundary excluded it
+    # under either rule.
+    exact_calls: [eval, exec]
+    calls: [__import__, importlib.import_module]
+    cwe: [CWE-94, CWE-95]
+  template:
+    calls: [render_template_string, Template.render, jinja2.Template,
+            from_string, mark_safe, format_html]
+    cwe: [CWE-79, CWE-1336]
+  path:
+    # `extractall` stays SINGLE-SEGMENT deliberately, and this comment is the
+    # reason. Censused 2026-08-24 over the cached CPGs (BENCHMARK_STATUS §4m):
+    # 53 nodes, 12 call sites, 4 receivers, ZERO collisions -- every one a local
+    # variable holding an archive (`tar`, `zf`, `z`, `archive`) or poetry's own
+    # extractall() wrapper. There is no dotted form to narrow to: the method
+    # name IS the signal, because `extractall` exists on TarFile and ZipFile and
+    # essentially nowhere else. The sink behind this project's only scored true
+    # positive is one of those local receivers -- `tar.extractall` at
+    # penelope.py:3418 -- so a narrowing that demanded a dotted receiver would
+    # delete it. tests/test_cpg.py:283 pins that; read it before editing here.
+    calls: [open, send_file, send_from_directory, shutil.copy, shutil.move,
+            os.remove, os.rename, Path.write_text, Path.write_bytes, extractall]
+    cwe: [CWE-22]
+  deserialize:
+    calls: [pickle.load, pickle.loads, marshal.loads, dill.loads,
+            jsonpickle.decode, shelve.open]
+    # yaml.load is only dangerous without SafeLoader; the loader kwarg decides.
+    conditional_calls:
+      yaml.load: {safe_when_kwarg: {Loader: [SafeLoader, CSafeLoader]}}
+    cwe: [CWE-502]
+  http_outbound:
+    calls: [requests.get, requests.post, requests.put, requests.delete,
+            requests.request, httpx.get, httpx.post, httpx.request,
+            urllib.request.urlopen, aiohttp.ClientSession.get,
+            aiohttp.ClientSession.post]
+    # SSRF folded into A01 Broken Access Control in OWASP 2025.
+    cwe: [CWE-918]
+  log:
+    calls: [logging.info, logging.debug, logging.warning, logging.error,
+            logging.exception, logger.info, logger.debug, logger.warning,
+            logger.error, logger.exception, print]
+    cwe: [CWE-532]
+  response:
+    calls: [HttpResponse, JsonResponse, make_response, jsonify, Response]
+    cwe: [CWE-200]
+
+# ---------------------------------------------------------------------------
+# Sanitizers, keyed by the sink_class they neutralize.
+# ---------------------------------------------------------------------------
+sanitizers:
+  sql:
+    # Parameter binding is structural, not a call — cpg.py detects it by seeing
+    # the tainted value arrive as a bound parameter rather than in the query
+    # string. These are the explicit-call escapes.
+    calls: [sql.Identifier, sql.Literal, bindparam, mogrify]
+  command:
+    calls: [shlex.quote, shlex.split, pipes.quote]
+  template:
+    # `escape` is exact because it is the worst case in the file, and the one
+    # that is loose in the direction the header's recall-over-precision trade
+    # does not cover. Measured over the 41 cached CPGs: 1,036 of the 1,344
+    # `escape` sanitizer nodes were **`re.escape`**, against 31 for the
+    # `html.escape` listed beside it — 33 to 1, and every one of them able to
+    # delete a template finding outright at `structural.py`'s `sanitized_by`
+    # check. `CSS.escape` was the next receiver down.
+    #
+    # The dotted forms that are real stay in `calls`, so
+    # `from markupsafe import escape; escape(x)` still sanitizes.
+    exact_calls: [escape]
+    calls: [html.escape, markupsafe.escape, bleach.clean, conditional_escape]
+  path:
+    calls: [secure_filename, os.path.abspath, os.path.realpath, Path.resolve,
+            os.path.basename]
+    # Resolving a path is only a sanitizer when the result is then checked to be
+    # inside a root; cpg.py requires a following comparison to count it.
+    requires_containment_check: true
+  deserialize:
+    calls: [json.loads, yaml.safe_load]
+  http_outbound:
+    calls: [urlparse, validate_url, is_allowed_host]
+    requires_containment_check: true
+  response:
+    calls: [serializers.serialize, model_to_dict]
+
+# ---------------------------------------------------------------------------
+# Sensitive field detection (A09 logging, A04 crypto, privacy/PII family).
+# Matched case-insensitively against attribute, parameter, and model-field names.
+# ---------------------------------------------------------------------------
+sensitive_fields:
+  credential: [password, passwd, pwd, secret, token, api_key, apikey, access_key,
+               private_key, client_secret, session_key, refresh_token, otp]
+  pii: [ssn, social_security, national_id, passport, drivers_license, dob,
+        date_of_birth, email, phone, address, full_name, ip_address]
+  financial: [credit_card, card_number, cardnumber, cvv, cvc, iban, account_number,
+              routing_number, salary, balance]
+  health: [diagnosis, medical_record, mrn, patient_id, prescription, icd]
+
+# ---------------------------------------------------------------------------
+# Anchor files — a change to any of these forces a full profile rebuild
+# (phase-1 §6). Mirrored into config `profile.anchor_globs`; this list is the
+# Python-specific default.
+# ---------------------------------------------------------------------------
+anchor_globs:
+  - "requirements*.txt"
+  - "pyproject.toml"
+  - "Pipfile"
+  - "setup.py"
+  - "setup.cfg"
+  - "**/settings.py"
+  - "**/settings/*.py"
+  - "**/urls.py"
+  - "**/middleware.py"
+  - "**/permissions.py"
+  - "**/auth.py"
+  - "**/authentication.py"
+  - "**/security.py"
+  - "**/conftest.py"
+  - "Dockerfile*"
+  - "**/*.tf"

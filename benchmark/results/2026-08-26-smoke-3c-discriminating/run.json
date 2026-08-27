@@ -1,0 +1,710 @@
+{
+  "dump_version": 2,
+  "corpus_name": "labelled",
+  "selection_criteria": "The 80 most recently published GitHub-reviewed advisories for the pip ecosystem as of 2026-08-07, capped at 2 per source repository and 1 per fixing commit, restricted to those carrying a CWE and a fixing-commit reference into their own repository whose parent is not a merge, whose fix diff is under 400 KB, and which touch reviewable Python source outside tests and docs. Ground-truth spans are the lines the fix removed, excluding spans that are entirely imports, version bumps or comments. Two fixing commits were then excluded by hand as bulk refactors whose spans mark remediation plumbing rather than the defect; the reasons are in benchmark/corpus/labelled-excluded.txt. NOT filtered by CWE: classes no 3a detector can emit are retained and reported as a stratum. Newest-first sampling makes the set post-cutoff for any model evaluated later. SMOKE SUBSET 2026-08-26: three cases from the pinned labelled corpus, chosen because arm 3 found findings on all three in all three stored passes (3/3/3 and 3/2/3) \u2014 a smoke on cases arm 3 is quiet on cannot tell a working arm from a broken one.",
+  "started_at": "2026-08-26T12:04:33",
+  "wall_s": 37.91506608296186,
+  "code_sha": "439373b-dirty",
+  "cold_profiles": false,
+  "arm": "llm-context:low:llm-context-bundles:capture@53be1ef",
+  "model_accounting": {
+    "calls": 3,
+    "cost_usd": 0.317582,
+    "uncached_tokens": 2583,
+    "cached_tokens": 81364,
+    "models": [
+      "sonnet"
+    ],
+    "tool_denials": 0,
+    "effort": [
+      "low"
+    ],
+    "cli_version": "2.1.246"
+  },
+  "detector_status": {},
+  "errors": [],
+  "cases": [
+    {
+      "case": {
+        "id": "GHSA-cj54-hpcc-gj6h:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "base_sha": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "head_sha": "471ef279700e9f79941d451acf88abe1601df875",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pr_task": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/thumbor__thumbor/src/3b986d13677b",
+          "head_dir": ".pr_review/cache/thumbor__thumbor/src/471ef279700e",
+          "title": "Revert 3b986d13677b",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "thumbor/loaders/file_loader.py",
+            "spans": [
+              [
+                19,
+                25
+              ],
+              [
+                37,
+                37
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-cj54-hpcc-gj6h",
+          "cve_id": "CVE-2026-53502",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "thumbor",
+          "summary": "Thumbor has path traversal via post-validation URL decoding bypass in file_loader",
+          "fix_commit": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "vuln_commit": "471ef279700e9f79941d451acf88abe1601df875",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pair_id": "GHSA-cj54-hpcc-gj6h"
+      },
+      "findings": [
+        {
+          "id": "e185f539-230a-40d1-8878-b6820a268909",
+          "fingerprint": "74fec74287e4fa4d",
+          "title": "Path traversal via percent-encoded fallback after root check",
+          "taxonomy": {
+            "internal": "BAC-PATH-TRAVERSAL",
+            "family": "Broken Access Control",
+            "owasp_2025": "A01",
+            "cwe": [
+              "CWE-22"
+            ],
+            "asvs": []
+          },
+          "severity": "high",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "thumbor/loaders/file_loader.py",
+            "start_line": 34,
+            "end_line": 40,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "thumbor/loaders/file_loader.py",
+              "lines": "34-40",
+              "snippet": "",
+              "why": "inside_root_path is validated on the raw (encoded) file_path before it exists on disk; if that fails, the code does file_path = unquote(file_path) and then opens it without re-checking containment, so a path like '%2e%2e/etc/passwd' passes the startswith check on the encoded form and decodes afterward to escape FILE_LOADER_ROOT_PATH, exactly the bypass the removed tests exercised."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Resolve the path and verify it stays inside the intended root.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-22",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:04:43.029023Z"
+        }
+      ],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 9.160992125049233,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.039369,
+        "uncached_tokens": 474,
+        "cached_tokens": 14101,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ],
+        "cli_version": "2.1.246"
+      },
+      "payload": {
+        "diff_chars": 4680,
+        "context_chars": 4665,
+        "message_chars": 9345,
+        "bundles": 2,
+        "slices": 4,
+        "slice_chars": 1198,
+        "groups_without_source": 0
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-22p9-r2f5-22mf:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "head_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/48f31cfac077",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "title": "Revert 48f31cfac077",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-59",
+            "file": "cli/onionshare_cli/web/send_base_mode.py",
+            "spans": [
+              [
+                113,
+                113
+              ],
+              [
+                130,
+                130
+              ],
+              [
+                134,
+                134
+              ],
+              [
+                156,
+                156
+              ],
+              [
+                166,
+                166
+              ],
+              [
+                181,
+                181
+              ],
+              [
+                185,
+                185
+              ],
+              [
+                259,
+                259
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-59",
+            "file": "cli/onionshare_cli/web/share_mode.py",
+            "spans": [
+              [
+                303,
+                305
+              ],
+              [
+                352,
+                352
+              ],
+              [
+                588,
+                588
+              ],
+              [
+                595,
+                599
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-59"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-22p9-r2f5-22mf",
+          "cve_id": "CVE-2026-54706",
+          "cwes": [
+            "CWE-59"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare follows symlinks in shared directories, allowing unintended disclosure of local files",
+          "fix_commit": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pair_id": "GHSA-22p9-r2f5-22mf"
+      },
+      "findings": [
+        {
+          "id": "112470cc-0ae9-41fc-910f-516fe1ecd2bc",
+          "fingerprint": "e0291725cbfceae2",
+          "title": "Symlink escape re-introduced in file inventory",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-61"
+            ],
+            "asvs": []
+          },
+          "severity": "high",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "cli/onionshare_cli/web/send_base_mode.py",
+            "start_line": 92,
+            "end_line": 149,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "cli/onionshare_cli/web/send_base_mode.py",
+              "lines": "92-149",
+              "snippet": "",
+              "why": "set_file_info no longer skips symlinks or checks containment; os.walk now runs with default followlinks=True, so a symlink inside a shared directory (root-level or nested) is added to self.files and served, allowing disclosure of files outside the shared root."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-61",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:04:53.917290Z"
+        },
+        {
+          "id": "dce8fbc4-9688-4ed7-94ce-03bed6f11400",
+          "fingerprint": "e0291725cbfceae2",
+          "title": "stream_individual_file lost containment check",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-61"
+            ],
+            "asvs": []
+          },
+          "severity": "high",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "cli/onionshare_cli/web/send_base_mode.py",
+            "start_line": 247,
+            "end_line": 253,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "cli/onionshare_cli/web/send_base_mode.py",
+              "lines": "247-253",
+              "snippet": "",
+              "why": "The removed _is_path_contained check meant individual file downloads no longer verify filesystem_path stays within selected roots, relying solely on the now-unsafe self.files mapping populated via followed symlinks."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-61",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:04:53.917458Z"
+        },
+        {
+          "id": "51ddfbf3-22d3-4de3-bc0b-4f4d2b6e766f",
+          "fingerprint": "63ac2855f46973a4",
+          "title": "ZipWriter.add_dir follows symlinked directories via os.walk",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-61"
+            ],
+            "asvs": []
+          },
+          "severity": "high",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "cli/onionshare_cli/web/share_mode.py",
+            "start_line": 585,
+            "end_line": 601,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "cli/onionshare_cli/web/share_mode.py",
+              "lines": "585-601",
+              "snippet": "",
+              "why": "os.walk(filename) now runs without followlinks=False, so a symlinked directory nested inside the shared tree will be traversed and its contents zipped, even though individual symlinked files are still skipped by the remaining islink check."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-61",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:04:53.917506Z"
+        },
+        {
+          "id": "0e6efc94-ed55-40e9-b031-a70a383c9af6",
+          "fingerprint": "63ac2855f46973a4",
+          "title": "ZipWriter.add_file no longer excludes symlinks",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-61"
+            ],
+            "asvs": []
+          },
+          "severity": "high",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "cli/onionshare_cli/web/share_mode.py",
+            "start_line": 575,
+            "end_line": 581,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "cli/onionshare_cli/web/share_mode.py",
+              "lines": "575-581",
+              "snippet": "",
+              "why": "add_file directly writes filename to the zip without checking os.path.islink or containment, so a symlinked file placed at the root of a shared directory is packaged into the downloadable zip, leaking file content outside the intended share root."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-61",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:04:53.917548Z"
+        }
+      ],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 9.21070499997586,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.132319,
+        "uncached_tokens": 665,
+        "cached_tokens": 33025,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ],
+        "cli_version": "2.1.246"
+      },
+      "payload": {
+        "diff_chars": 22141,
+        "context_chars": 39709,
+        "message_chars": 61850,
+        "bundles": 3,
+        "slices": 17,
+        "slice_chars": 28015,
+        "groups_without_source": 1
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-22p9-r2f5-22mf:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "head_sha": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/48f31cfac077",
+          "title": "Apply 48f31cfac077",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-59"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-22p9-r2f5-22mf",
+          "cve_id": "CVE-2026-54706",
+          "cwes": [
+            "CWE-59"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare follows symlinks in shared directories, allowing unintended disclosure of local files",
+          "fix_commit": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pair_id": "GHSA-22p9-r2f5-22mf"
+      },
+      "findings": [
+        {
+          "id": "aaf9364c-3fe9-4b0a-8857-19bf202a3376",
+          "fingerprint": "50d54c47e3a76b99",
+          "title": "TOCTOU race between containment check and file open",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-367"
+            ],
+            "asvs": []
+          },
+          "severity": "low",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "cli/onionshare_cli/web/send_base_mode.py",
+            "start_line": 149,
+            "end_line": 165,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "cli/onionshare_cli/web/send_base_mode.py",
+              "lines": "149-165",
+              "snippet": "",
+              "why": "_is_path_contained resolves the path with os.path.realpath and the file is opened/streamed later; a local attacker who can modify the shared directory between the check and the subsequent open()/os.walk() traversal could swap a regular file for a symlink pointing outside the selected roots, bypassing the new containment guard."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-context-bundles",
+            "rule_id": "CWE-367",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-26T16:05:11.892241Z"
+        }
+      ],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 17.974613749887794,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.145893,
+        "uncached_tokens": 1444,
+        "cached_tokens": 34238,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ],
+        "cli_version": "2.1.246"
+      },
+      "payload": {
+        "diff_chars": 22137,
+        "context_chars": 44370,
+        "message_chars": 66507,
+        "bundles": 4,
+        "slices": 20,
+        "slice_chars": 32782,
+        "groups_without_source": 1
+      }
+    }
+  ]
+}

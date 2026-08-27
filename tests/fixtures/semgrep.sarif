@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Semgrep OSS",
+          "semanticVersion": "1.172.0",
+          "rules": [
+            {
+              "id": "python.lang.security.audit.subprocess-shell-true.subprocess-shell-true",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "security-severity": "8.5"
+              }
+            },
+            {
+              "id": "python.aws-lambda.security.mysql-sqli.mysql-sqli",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "security-severity": "9.3"
+              }
+            },
+            {
+              "id": "python.django.security.injection.open-redirect.open-redirect",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {}
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "python.lang.security.audit.subprocess-shell-true.subprocess-shell-true",
+          "message": {
+            "text": "Detected subprocess function 'run' with shell=True."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "api.py"
+                },
+                "region": {
+                  "startLine": 40,
+                  "endLine": 40,
+                  "snippet": {
+                    "text": "return subprocess.run(cmd, shell=True)"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "python.aws-lambda.security.mysql-sqli.mysql-sqli",
+          "message": {
+            "text": "Detected SQL statement that is tainted by user input."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///repo/app.py"
+                },
+                "region": {
+                  "startLine": 48,
+                  "snippet": {
+                    "text": "cursor.execute(f\"SELECT * FROM t WHERE n = '{term}'\")"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "python.django.security.injection.open-redirect.open-redirect",
+          "message": {
+            "text": "Data from request is passed to redirect()."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "util.py"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

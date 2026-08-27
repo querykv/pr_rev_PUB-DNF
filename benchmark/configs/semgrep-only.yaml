@@ -1,0 +1,29 @@
+# ARM 1 — Semgrep alone.
+#
+# The lift question: does the pipeline beat the scanner it wraps? plan/benchmark.md
+# §3 asks for this column and it is the only baseline reachable without a model.
+#
+# Nothing here is new code. Every detector is already individually gated by
+# `config.detectors.<name>.enabled` (detect/runner.py), and `benchmark run
+# --config` already accepts a file, so the arm is a configuration of the
+# shipping pipeline rather than a second harness. That matters for fairness:
+# semgrep runs through the same normalization, dedup and delta scoping the full
+# pipeline uses, so the only variable between arm 1 and arm 2 is which
+# detectors ran.
+#
+# `structural: false` is what makes this a real ablation rather than a cosmetic
+# one -- structural is the CPG taint detector and the source of most findings.
+# Note that Phase 1 profiling still runs; it is the *detector* that is off, and
+# a scorecard from this config must not be read as "the pipeline without the
+# CPG", only as "semgrep's findings, scored the same way".
+detectors:
+  semgrep:
+    enabled: true
+  secrets:
+    enabled: false
+  structural:
+    enabled: false
+  sca:
+    enabled: false
+  iac:
+    enabled: false

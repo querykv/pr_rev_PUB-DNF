@@ -1,0 +1,867 @@
+{
+  "dump_version": 2,
+  "corpus_name": "labelled",
+  "selection_criteria": "The 80 most recently published GitHub-reviewed advisories for the pip ecosystem as of 2026-08-07, capped at 2 per source repository and 1 per fixing commit, restricted to those carrying a CWE and a fixing-commit reference into their own repository whose parent is not a merge, whose fix diff is under 400 KB, and which touch reviewable Python source outside tests and docs. Ground-truth spans are the lines the fix removed, excluding spans that are entirely imports, version bumps or comments. Two fixing commits were then excluded by hand as bulk refactors whose spans mark remediation plumbing rather than the defect; the reasons are in benchmark/corpus/labelled-excluded.txt. NOT filtered by CWE: classes no 3a detector can emit are retained and reported as a stratum. Newest-first sampling makes the set post-cutoff for any model evaluated later.",
+  "started_at": "2026-08-21T15:41:33",
+  "wall_s": 147.75796304107644,
+  "code_sha": "21c7151-dirty",
+  "cold_profiles": false,
+  "arm": "triage-live",
+  "model_accounting": {
+    "calls": 5,
+    "cost_usd": 0.093259,
+    "content_tokens": 10139,
+    "transport_overhead_tokens": 36725,
+    "models": [
+      "haiku"
+    ],
+    "tool_denials": 0,
+    "dropped_effort": [
+      "low"
+    ]
+  },
+  "detector_status": {
+    "secrets": {
+      "ran": 6
+    },
+    "structural": {
+      "ran": 6
+    },
+    "semgrep": {
+      "ran": 6
+    },
+    "iac": {
+      "not_applicable": 6
+    },
+    "sca": {
+      "not_applicable": 6
+    }
+  },
+  "errors": [],
+  "cases": [
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "title": "Revert afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "pypdf/_cmap.py",
+            "spans": [
+              [
+                245,
+                245
+              ],
+              [
+                260,
+                264
+              ],
+              [
+                271,
+                271
+              ],
+              [
+                281,
+                285
+              ],
+              [
+                296,
+                300
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.334339041961357,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 4.502,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "secrets",
+            "structural",
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {
+        "calls": 0,
+        "cost_usd": 0,
+        "content_tokens": 0,
+        "transport_overhead_tokens": 0,
+        "models": [],
+        "tool_denials": 0,
+        "dropped_effort": []
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Apply afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 34.65168716595508,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [
+        {
+          "path": "pypdf/_cmap.py",
+          "hunk_ids": [
+            "ef822413092e:h1"
+          ],
+          "reason": "triage_not_relevant",
+          "detail": "cheap-model triage labelled these hunks not security-relevant",
+          "guardrail_considered": true
+        },
+        {
+          "path": "tests/test_cmap.py",
+          "hunk_ids": [
+            "dfb379a219f5:h1"
+          ],
+          "reason": "triage_not_relevant",
+          "detail": "cheap-model triage labelled these hunks not security-relevant",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.103,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "cache",
+          "fingerprints": 0,
+          "paths": 2
+        }
+      },
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.017251,
+        "content_tokens": 2768,
+        "transport_overhead_tokens": 7743,
+        "models": [
+          "haiku"
+        ],
+        "tool_denials": 0,
+        "dropped_effort": [
+          "low"
+        ]
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-fwg2-594c-jp42:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/51cb6acf9e8a",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Revert 51cb6acf9e8a",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-834",
+            "file": "pypdf/_font.py",
+            "spans": [
+              [
+                148,
+                150
+              ],
+              [
+                161,
+                161
+              ],
+              [
+                177,
+                177
+              ],
+              [
+                182,
+                186
+              ],
+              [
+                199,
+                200
+              ],
+              [
+                207,
+                207
+              ],
+              [
+                405,
+                407
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-834"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fwg2-594c-jp42",
+          "cve_id": "CVE-2026-71852",
+          "cwes": [
+            "CWE-834"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible long runtimes/large memory usage for large CID font width ranges",
+          "fix_commit": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "vuln_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pair_id": "GHSA-fwg2-594c-jp42"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 21.06753820879385,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.988,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "cache",
+          "fingerprints": 0,
+          "paths": 2
+        }
+      },
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.010487,
+        "content_tokens": 1531,
+        "transport_overhead_tokens": 7230,
+        "models": [
+          "haiku"
+        ],
+        "tool_denials": 0,
+        "dropped_effort": [
+          "low"
+        ]
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-fwg2-594c-jp42:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/51cb6acf9e8a",
+          "title": "Apply 51cb6acf9e8a",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-834"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fwg2-594c-jp42",
+          "cve_id": "CVE-2026-71852",
+          "cwes": [
+            "CWE-834"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible long runtimes/large memory usage for large CID font width ranges",
+          "fix_commit": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "vuln_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pair_id": "GHSA-fwg2-594c-jp42"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 20.948190042050555,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.172,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "secrets",
+            "structural",
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.011787,
+        "content_tokens": 1794,
+        "transport_overhead_tokens": 7230,
+        "models": [
+          "haiku"
+        ],
+        "tool_denials": 0,
+        "dropped_effort": [
+          "low"
+        ]
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-gm37-52c6-37mw:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "base_sha": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "head_sha": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pr_task": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/c68498598d7b",
+          "head_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/6d0097b85a52",
+          "title": "Revert c68498598d7b",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/betterem.py",
+            "spans": [
+              [
+                67,
+                67
+              ],
+              [
+                69,
+                69
+              ],
+              [
+                93,
+                93
+              ],
+              [
+                126,
+                126
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/caret.py",
+            "spans": [
+              [
+                56,
+                56
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/magiclink.py",
+            "spans": [
+              [
+                59,
+                60
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/tilde.py",
+            "spans": [
+              [
+                55,
+                55
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-gm37-52c6-37mw",
+          "cve_id": "CVE-2026-67422",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "pymdown-extensions",
+          "summary": "pymdown-extensions: exponential-backtracking ReDoS in caret, tilde, betterem, and magiclink inline processors",
+          "fix_commit": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "vuln_commit": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pair_id": "GHSA-gm37-52c6-37mw"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 33.068425541045144,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "docs/src/markdown/about/changelog.md",
+          "hunk_ids": [
+            "acc7c636458a:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "pymdownx/__meta__.py",
+          "hunk_ids": [
+            "392dbeeaabf2:h1"
+          ],
+          "reason": "triage_not_relevant",
+          "detail": "cheap-model triage labelled these hunks not security-relevant",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 3.836,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "secrets",
+            "structural",
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.027412,
+        "content_tokens": 2157,
+        "transport_overhead_tokens": 7201,
+        "models": [
+          "haiku"
+        ],
+        "tool_denials": 0,
+        "dropped_effort": [
+          "low"
+        ]
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-gm37-52c6-37mw:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "base_sha": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "head_sha": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pr_task": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/6d0097b85a52",
+          "head_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/c68498598d7b",
+          "title": "Apply c68498598d7b",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-gm37-52c6-37mw",
+          "cve_id": "CVE-2026-67422",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "pymdown-extensions",
+          "summary": "pymdown-extensions: exponential-backtracking ReDoS in caret, tilde, betterem, and magiclink inline processors",
+          "fix_commit": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "vuln_commit": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pair_id": "GHSA-gm37-52c6-37mw"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 30.684340000152588,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "docs/src/markdown/about/changelog.md",
+          "hunk_ids": [
+            "acc7c636458a:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "pymdownx/__meta__.py",
+          "hunk_ids": [
+            "392dbeeaabf2:h1"
+          ],
+          "reason": "triage_not_relevant",
+          "detail": "cheap-model triage labelled these hunks not security-relevant",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "secrets": {
+          "status": "ran",
+          "findings": 0
+        },
+        "structural": {
+          "status": "ran",
+          "findings": 0,
+          "taint_paths": 0,
+          "taint_findings": 0,
+          "endpoints": 0,
+          "access_findings": 0,
+          "base_graph": true
+        },
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 3.669,
+          "baseline_commit": null
+        },
+        "iac": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "sca": {
+          "status": "not_applicable",
+          "findings": 0
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "secrets",
+            "structural",
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.026322,
+        "content_tokens": 1889,
+        "transport_overhead_tokens": 7321,
+        "models": [
+          "haiku"
+        ],
+        "tool_denials": 0,
+        "dropped_effort": [
+          "low"
+        ]
+      }
+    }
+  ]
+}

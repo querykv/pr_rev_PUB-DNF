@@ -1,0 +1,25 @@
+{
+  "benchmark/results/comparison.html": {
+    "benchmark/results/2026-08-09-labelled-receivers/run.json": "74407949e21d4b5591941505cf03b9cbb2b7803afe03e42680c9c7bf0669f10b",
+    "benchmark/results/2026-08-21-arm1-semgrep-only/run.json": "0f288cedd2ac493fed8d3a8bbebbb97cf43093969a8a880fed933cf61bf6ad14",
+    "benchmark/results/2026-08-21-arm3-llm-p1/run.json": "88d4014df1bca824428be3a87beec5462bda9ed3307286fef532d0bd9cf31f3f",
+    "benchmark/results/2026-08-21-arm3-llm-p2/run.json": "3ea152c765bf3087802826506e8d368fe0af6b3ed838bfccaa44341a970e92a6",
+    "benchmark/results/2026-08-21-arm3-llm-p3/run.json": "560fcd636526bc8ccfe60116ee401058038fa81300a086e5e850d5c4ce7f6e21",
+    "benchmark/results/2026-08-21-triage-live-negative/run.json": "69198faf18f97f8568550b709dc599b2bfb1c3fb11bf917836263fcab5872921",
+    "benchmark/results/2026-08-22-arm2c-hunk-scoping/run.json": "dd71ae9dc95fff34ba81c87421bb9cd65c4cf9e3c93b349b483d0565f6d0b5cf",
+    "benchmark/results/2026-08-22-arm3b-introduced-only/run.json": "5851bcd647227ebb3bac3a01c7e5d7bb875e0eb1e6e1dfe329da903c883f7e4e",
+    "benchmark/results/2026-08-24-arm3b-introduced-only-p2/run.json": "5c032769b7aa774976ee7206a8d1d00a5914d8fe80b963cc81fd54054bbde28a",
+    "benchmark/results/2026-08-24-arm3b-introduced-only-p3/run.json": "2aa6ca67122ea0f2b9eba775d8c8296c3c01a612f33a9bb5c5581b4f0b3e364a",
+    "benchmark/results/2026-08-26-arm3-negative-p1/run.json": "438c1a72d92174b9b83e3b3001cb78e49f452731b82e5f7b697f9eebc7e2d5a6",
+    "benchmark/results/2026-08-26-arm3c-labelled-p1/run.json": "82c7fb35eb82beead9a906eba2c8b9576ff66d0db95c46c98eac9a850b98045d",
+    "benchmark/results/2026-08-26-arm3c-labelled-p2/run.json": "48ba75b045a00400f72d5f2839d0effd1290d742643bbbe39ad6ac04ed905b2c",
+    "benchmark/results/2026-08-26-arm3c-labelled-p3/run.json": "edee2414e533ffa15e9d197363ae7ddfaa048ae04be1635f9f8ef58b9292e0e4",
+    "benchmark/results/2026-08-26-arm3c-negative-p1/run.json": "bf9c8ea0b4f0f0063814a5c8df67702174fb2247a3280f64de7c4ac2a9247ffe",
+    "benchmark/results/comparison.sh": "430ecc4703128591066ebecbcb74e8d0decd0b852b0f648951c2ebda3b72b7d6",
+    "pr_review/benchmark/report_html.py": "fe5f19c4d3887f596f278f24690217c2e952a2c77823a22650f00f1aebaaa94c"
+  },
+  "https://claude.ai/code/artifact/5a173399-6cfc-4605-950e-4de9ba15b46d": {
+    "REPORT.md": "de39c9c499eee77b893e5a4bc492daa401267433f800dc9c2e4a6473885bd828",
+    "render_report.py": "545df2577676065c87d41613fec0232dfb5a9c1bd966be68e5baf3c899110d55"
+  }
+}

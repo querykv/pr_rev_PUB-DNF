@@ -1,0 +1,13 @@
+# Environment and build
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Run artifacts and local state
+.pr_review/
+# CAP's CGP session database
+.state/

@@ -1,0 +1,247 @@
+{
+  "dump_version": 2,
+  "corpus_name": "labelled",
+  "selection_criteria": "The 80 most recently published GitHub-reviewed advisories for the pip ecosystem as of 2026-08-07, capped at 2 per source repository and 1 per fixing commit, restricted to those carrying a CWE and a fixing-commit reference into their own repository whose parent is not a merge, whose fix diff is under 400 KB, and which touch reviewable Python source outside tests and docs. Ground-truth spans are the lines the fix removed, excluding spans that are entirely imports, version bumps or comments. Two fixing commits were then excluded by hand as bulk refactors whose spans mark remediation plumbing rather than the defect; the reasons are in benchmark/corpus/labelled-excluded.txt. NOT filtered by CWE: classes no 3a detector can emit are retained and reported as a stratum. Newest-first sampling makes the set post-cutoff for any model evaluated later.",
+  "started_at": "2026-08-22T13:32:01",
+  "wall_s": 9.91196412499994,
+  "code_sha": "de7d449-dirty",
+  "cold_profiles": false,
+  "arm": "llm-diff:low:llm-diff-introduced-only",
+  "model_accounting": {
+    "calls": 2,
+    "cost_usd": 0.095221,
+    "uncached_tokens": 408,
+    "cached_tokens": 25832,
+    "models": [
+      "sonnet"
+    ],
+    "tool_denials": 0,
+    "effort": [
+      "low"
+    ]
+  },
+  "detector_status": {},
+  "errors": [],
+  "cases": [
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "title": "Revert afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "pypdf/_cmap.py",
+            "spans": [
+              [
+                245,
+                245
+              ],
+              [
+                260,
+                264
+              ],
+              [
+                271,
+                271
+              ],
+              [
+                281,
+                285
+              ],
+              [
+                296,
+                300
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [
+        {
+          "id": "de634046-c1a4-43a6-ba98-2c8a7a6cedf9",
+          "fingerprint": "5031aeb79c71a3e8",
+          "title": "Removed per-token length limits in bfrange parsing",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [
+              "CWE-400"
+            ],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "candidate",
+          "introduced_by_pr": true,
+          "location": {
+            "file": "pypdf/_cmap.py",
+            "start_line": 257,
+            "end_line": 305,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "pypdf/_cmap.py",
+              "lines": "257-305",
+              "snippet": "",
+              "why": "This diff deletes all `_check_token_length` calls that previously bounded code/string hex tokens (MAX_CMAP_CODE_BYTES_LIMIT/MAX_CMAP_STRING_BYTES_LIMIT) before passing them to unhexlify/decode, so an attacker-supplied /ToUnicode CMap with arbitrarily long hex tokens can now cause excessive memory/CPU use with no limit besides the overall mapping-size check."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "agent",
+            "tool": "llm-diff-baseline",
+            "rule_id": "CWE-400",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-22T17:32:09.501117Z"
+        }
+      ],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 7.529678208986297,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.060039,
+        "uncached_tokens": 397,
+        "cached_tokens": 12916,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ]
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Apply afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 2.382091833045706,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.035182,
+        "uncached_tokens": 11,
+        "cached_tokens": 12916,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ]
+      }
+    }
+  ]
+}

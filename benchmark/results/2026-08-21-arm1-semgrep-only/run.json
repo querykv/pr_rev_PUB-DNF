@@ -1,0 +1,5204 @@
+{
+  "dump_version": 2,
+  "corpus_name": "labelled",
+  "selection_criteria": "The 80 most recently published GitHub-reviewed advisories for the pip ecosystem as of 2026-08-07, capped at 2 per source repository and 1 per fixing commit, restricted to those carrying a CWE and a fixing-commit reference into their own repository whose parent is not a merge, whose fix diff is under 400 KB, and which touch reviewable Python source outside tests and docs. Ground-truth spans are the lines the fix removed, excluding spans that are entirely imports, version bumps or comments. Two fixing commits were then excluded by hand as bulk refactors whose spans mark remediation plumbing rather than the defect; the reasons are in benchmark/corpus/labelled-excluded.txt. NOT filtered by CWE: classes no 3a detector can emit are retained and reported as a stratum. Newest-first sampling makes the set post-cutoff for any model evaluated later.",
+  "started_at": "2026-08-21T16:31:18",
+  "wall_s": 804.6189559579361,
+  "code_sha": "e412904-dirty",
+  "cold_profiles": true,
+  "arm": "deterministic",
+  "model_accounting": {},
+  "detector_status": {
+    "semgrep": {
+      "ran": 52
+    }
+  },
+  "errors": [],
+  "cases": [
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "title": "Revert afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "pypdf/_cmap.py",
+            "spans": [
+              [
+                245,
+                245
+              ],
+              [
+                260,
+                264
+              ],
+              [
+                271,
+                271
+              ],
+              [
+                281,
+                285
+              ],
+              [
+                296,
+                300
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 9.192475874908268,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.196,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Apply afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.107475874945521,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.622,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-fwg2-594c-jp42:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/51cb6acf9e8a",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Revert 51cb6acf9e8a",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-834",
+            "file": "pypdf/_font.py",
+            "spans": [
+              [
+                148,
+                150
+              ],
+              [
+                161,
+                161
+              ],
+              [
+                177,
+                177
+              ],
+              [
+                182,
+                186
+              ],
+              [
+                199,
+                200
+              ],
+              [
+                207,
+                207
+              ],
+              [
+                405,
+                407
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-834"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fwg2-594c-jp42",
+          "cve_id": "CVE-2026-71852",
+          "cwes": [
+            "CWE-834"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible long runtimes/large memory usage for large CID font width ranges",
+          "fix_commit": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "vuln_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pair_id": "GHSA-fwg2-594c-jp42"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.157643959159032,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.743,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-fwg2-594c-jp42:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/51cb6acf9e8a",
+          "title": "Apply 51cb6acf9e8a",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-834"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fwg2-594c-jp42",
+          "cve_id": "CVE-2026-71852",
+          "cwes": [
+            "CWE-834"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible long runtimes/large memory usage for large CID font width ranges",
+          "fix_commit": "51cb6acf9e8a35b77e90b4d87d28fe3e1416d7d7",
+          "vuln_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fwg2-594c-jp42"
+        },
+        "pair_id": "GHSA-fwg2-594c-jp42"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.08542099990882,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.743,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-gm37-52c6-37mw:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "base_sha": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "head_sha": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pr_task": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/c68498598d7b",
+          "head_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/6d0097b85a52",
+          "title": "Revert c68498598d7b",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/betterem.py",
+            "spans": [
+              [
+                67,
+                67
+              ],
+              [
+                69,
+                69
+              ],
+              [
+                93,
+                93
+              ],
+              [
+                126,
+                126
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/caret.py",
+            "spans": [
+              [
+                56,
+                56
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/magiclink.py",
+            "spans": [
+              [
+                59,
+                60
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-1333",
+            "file": "pymdownx/tilde.py",
+            "spans": [
+              [
+                55,
+                55
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-gm37-52c6-37mw",
+          "cve_id": "CVE-2026-67422",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "pymdown-extensions",
+          "summary": "pymdown-extensions: exponential-backtracking ReDoS in caret, tilde, betterem, and magiclink inline processors",
+          "fix_commit": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "vuln_commit": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pair_id": "GHSA-gm37-52c6-37mw"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.512025458971038,
+      "error": "",
+      "changed_files": 5,
+      "dropped": [
+        {
+          "path": "docs/src/markdown/about/changelog.md",
+          "hunk_ids": [
+            "acc7c636458a:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 3.294,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-gm37-52c6-37mw:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "base_sha": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "head_sha": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pr_task": {
+          "repo": "facelessuser/pymdown-extensions",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/6d0097b85a52",
+          "head_dir": ".pr_review/cache/facelessuser__pymdown-extensions/src/c68498598d7b",
+          "title": "Apply c68498598d7b",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-gm37-52c6-37mw",
+          "cve_id": "CVE-2026-67422",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "pymdown-extensions",
+          "summary": "pymdown-extensions: exponential-backtracking ReDoS in caret, tilde, betterem, and magiclink inline processors",
+          "fix_commit": "c68498598d7b13011bb4571350b6e3612a4ce44b",
+          "vuln_commit": "6d0097b85a52468e7cd8eaceaa192ff3348c41e0",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-gm37-52c6-37mw"
+        },
+        "pair_id": "GHSA-gm37-52c6-37mw"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.666320042219013,
+      "error": "",
+      "changed_files": 5,
+      "dropped": [
+        {
+          "path": "docs/src/markdown/about/changelog.md",
+          "hunk_ids": [
+            "acc7c636458a:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 3.271,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-wvpp-8hx9-p66j:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "base_sha": "96a888f4d782cb2f80452148e48e60ce4af6d541",
+          "head_sha": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-wvpp-8hx9-p66j"
+        },
+        "pr_task": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/gitpython-developers__GitPython/src/96a888f4d782",
+          "head_dir": ".pr_review/cache/gitpython-developers__GitPython/src/a495ccd3b547",
+          "title": "Revert 96a888f4d782",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-88",
+            "file": "git/cmd.py",
+            "spans": [
+              [
+                1047,
+                1048
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-88"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-wvpp-8hx9-p66j",
+          "cve_id": "",
+          "cwes": [
+            "CWE-88"
+          ],
+          "package": "GitPython",
+          "summary": "GitPython: Unsafe git option guard bypass via split_single_char_options=False short-option token smuggling enables command execution",
+          "fix_commit": "96a888f4d782cb2f80452148e48e60ce4af6d541",
+          "vuln_commit": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-wvpp-8hx9-p66j"
+        },
+        "pair_id": "GHSA-wvpp-8hx9-p66j"
+      },
+      "findings": [
+        {
+          "id": "8fd26f31-6013-44c9-9dcb-9122b5c0342b",
+          "fingerprint": "522009ec69068af0",
+          "title": "These permissions `0o755` are widely permissive and grant access to more people than may be necessary. A good default is",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 3,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "test/test_git.py",
+            "start_line": 350,
+            "end_line": 350,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "test/test_git.py",
+              "lines": "350",
+              "snippet": "os.chmod(impostor_path, 0o755)",
+              "why": "These permissions `0o755` are widely permissive and grant access to more people than may be necessary. A good default is `0o644` which gives read and write access to yourself and read access to everyone else."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:32:14.524884Z"
+        },
+        {
+          "id": "7da82ccb-056f-4706-9990-1ace03592b27",
+          "fingerprint": "3c5ec86f9c78d6f1",
+          "title": "These permissions `0o777` are widely permissive and grant access to more people than may be necessary. A good default is",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 3,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "test/test_git.py",
+            "start_line": 890,
+            "end_line": 890,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "test/test_git.py",
+              "lines": "890",
+              "snippet": "os.chmod(path, 0o777)",
+              "why": "These permissions `0o777` are widely permissive and grant access to more people than may be necessary. A good default is `0o644` which gives read and write access to yourself and read access to everyone else."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:32:14.525062Z"
+        }
+      ],
+      "pre_existing": 2,
+      "verdict": "approved",
+      "wall_s": 8.918756457976997,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 2,
+          "results": 2,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 2,
+          "heuristic_rules": [],
+          "unmapped_rules": [
+            "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions"
+          ],
+          "files": 2,
+          "duration_s": 3.184,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 2,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-wvpp-8hx9-p66j:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "base_sha": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "head_sha": "96a888f4d782cb2f80452148e48e60ce4af6d541",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-wvpp-8hx9-p66j"
+        },
+        "pr_task": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/gitpython-developers__GitPython/src/a495ccd3b547",
+          "head_dir": ".pr_review/cache/gitpython-developers__GitPython/src/96a888f4d782",
+          "title": "Apply 96a888f4d782",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-88"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-wvpp-8hx9-p66j",
+          "cve_id": "",
+          "cwes": [
+            "CWE-88"
+          ],
+          "package": "GitPython",
+          "summary": "GitPython: Unsafe git option guard bypass via split_single_char_options=False short-option token smuggling enables command execution",
+          "fix_commit": "96a888f4d782cb2f80452148e48e60ce4af6d541",
+          "vuln_commit": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-wvpp-8hx9-p66j"
+        },
+        "pair_id": "GHSA-wvpp-8hx9-p66j"
+      },
+      "findings": [],
+      "pre_existing": 2,
+      "verdict": "approved",
+      "wall_s": 8.871553209144622,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 2,
+          "results": 2,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 2,
+          "heuristic_rules": [],
+          "unmapped_rules": [
+            "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions"
+          ],
+          "files": 2,
+          "duration_s": 3.414,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 2,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-jm78-9fvv-mhgr:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "base_sha": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "head_sha": "f4277fa65158681bd3948d5f47805578db905fab",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-jm78-9fvv-mhgr"
+        },
+        "pr_task": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/gitpython-developers__GitPython/src/a495ccd3b547",
+          "head_dir": ".pr_review/cache/gitpython-developers__GitPython/src/f4277fa65158",
+          "title": "Revert a495ccd3b547",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-74",
+            "file": "git/config.py",
+            "spans": [
+              [
+                75,
+                80
+              ],
+              [
+                900,
+                905
+              ]
+            ],
+            "note": "the fix only added; span is the insertion point"
+          }
+        ],
+        "cwe": [
+          "CWE-74",
+          "CWE-88"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-jm78-9fvv-mhgr",
+          "cve_id": "",
+          "cwes": [
+            "CWE-74",
+            "CWE-88"
+          ],
+          "package": "GitPython",
+          "summary": "GitPython: git-config OPTION-name injection via =/#/whitespace bypasses name validator, enabling forged core.sshCommand/hooksPath (RCE)",
+          "fix_commit": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "vuln_commit": "f4277fa65158681bd3948d5f47805578db905fab",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-jm78-9fvv-mhgr"
+        },
+        "pair_id": "GHSA-jm78-9fvv-mhgr"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.069683042122051,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.723,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-jm78-9fvv-mhgr:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "base_sha": "f4277fa65158681bd3948d5f47805578db905fab",
+          "head_sha": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-jm78-9fvv-mhgr"
+        },
+        "pr_task": {
+          "repo": "gitpython-developers/GitPython",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/gitpython-developers__GitPython/src/f4277fa65158",
+          "head_dir": ".pr_review/cache/gitpython-developers__GitPython/src/a495ccd3b547",
+          "title": "Apply a495ccd3b547",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-74",
+          "CWE-88"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-jm78-9fvv-mhgr",
+          "cve_id": "",
+          "cwes": [
+            "CWE-74",
+            "CWE-88"
+          ],
+          "package": "GitPython",
+          "summary": "GitPython: git-config OPTION-name injection via =/#/whitespace bypasses name validator, enabling forged core.sshCommand/hooksPath (RCE)",
+          "fix_commit": "a495ccd3b547ccd60b2187215823b72a9c0188bf",
+          "vuln_commit": "f4277fa65158681bd3948d5f47805578db905fab",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-jm78-9fvv-mhgr"
+        },
+        "pair_id": "GHSA-jm78-9fvv-mhgr"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.915297625120729,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.828,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-6hr6-w5qg-qmwg:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "python-hyper/h2",
+          "pr_number": 0,
+          "base_sha": "292a40829feefda98c8509dcdbbb4a57af9bd6a6",
+          "head_sha": "04d3b87cbc1db020d28c7cfb44fe194558efbdde",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-6hr6-w5qg-qmwg"
+        },
+        "pr_task": {
+          "repo": "python-hyper/h2",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/python-hyper__h2/src/292a40829fee",
+          "head_dir": ".pr_review/cache/python-hyper__h2/src/04d3b87cbc1d",
+          "title": "Revert 292a40829fee",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-444",
+            "file": "src/h2/utilities.py",
+            "spans": [
+              [
+                449,
+                454
+              ]
+            ],
+            "note": "the fix only added; span is the insertion point"
+          }
+        ],
+        "cwe": [
+          "CWE-444"
+        ],
+        "published": "2026-08-06",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-6hr6-w5qg-qmwg",
+          "cve_id": "CVE-2026-71554",
+          "cwes": [
+            "CWE-444"
+          ],
+          "package": "h2",
+          "summary": "h2: Duplicate Host header could facilitate request smuggling",
+          "fix_commit": "292a40829feefda98c8509dcdbbb4a57af9bd6a6",
+          "vuln_commit": "04d3b87cbc1db020d28c7cfb44fe194558efbdde",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-6hr6-w5qg-qmwg"
+        },
+        "pair_id": "GHSA-6hr6-w5qg-qmwg"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 5.996993083041161,
+      "error": "",
+      "changed_files": 1,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 2.56,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-6hr6-w5qg-qmwg:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "python-hyper/h2",
+          "pr_number": 0,
+          "base_sha": "04d3b87cbc1db020d28c7cfb44fe194558efbdde",
+          "head_sha": "292a40829feefda98c8509dcdbbb4a57af9bd6a6",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-6hr6-w5qg-qmwg"
+        },
+        "pr_task": {
+          "repo": "python-hyper/h2",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/python-hyper__h2/src/04d3b87cbc1d",
+          "head_dir": ".pr_review/cache/python-hyper__h2/src/292a40829fee",
+          "title": "Apply 292a40829fee",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-444"
+        ],
+        "published": "2026-08-06",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-6hr6-w5qg-qmwg",
+          "cve_id": "CVE-2026-71554",
+          "cwes": [
+            "CWE-444"
+          ],
+          "package": "h2",
+          "summary": "h2: Duplicate Host header could facilitate request smuggling",
+          "fix_commit": "292a40829feefda98c8509dcdbbb4a57af9bd6a6",
+          "vuln_commit": "04d3b87cbc1db020d28c7cfb44fe194558efbdde",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-6hr6-w5qg-qmwg"
+        },
+        "pair_id": "GHSA-6hr6-w5qg-qmwg"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.688002750044689,
+      "error": "",
+      "changed_files": 1,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 2.996,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-47pj-3jcm-6whg:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "langchain-ai/langgraph",
+          "pr_number": 0,
+          "base_sha": "66ebe1a0da921e73f0f9f879ba105d314c079f7c",
+          "head_sha": "41341457342327166d72fc11952ab28fb61ec0bf",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-47pj-3jcm-6whg"
+        },
+        "pr_task": {
+          "repo": "langchain-ai/langgraph",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/langchain-ai__langgraph/src/66ebe1a0da92",
+          "head_dir": ".pr_review/cache/langchain-ai__langgraph/src/413414573423",
+          "title": "Revert 66ebe1a0da92",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-200",
+            "file": "libs/checkpoint-postgres/langgraph/store/postgres/base.py",
+            "spans": [
+              [
+                466,
+                467
+              ],
+              [
+                620,
+                626
+              ],
+              [
+                628,
+                628
+              ],
+              [
+                1274,
+                1276
+              ],
+              [
+                1278,
+                1279
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-200",
+            "file": "libs/checkpoint-sqlite/langgraph/store/sqlite/aio.py",
+            "spans": [
+              [
+                24,
+                34
+              ],
+              [
+                150,
+                155
+              ]
+            ],
+            "note": "the fix only added; span is the insertion point"
+          },
+          {
+            "cwe": "CWE-200",
+            "file": "libs/checkpoint-sqlite/langgraph/store/sqlite/base.py",
+            "spans": [
+              [
+                96,
+                98
+              ],
+              [
+                100,
+                101
+              ],
+              [
+                464,
+                465
+              ],
+              [
+                506,
+                506
+              ],
+              [
+                509,
+                509
+              ],
+              [
+                511,
+                511
+              ],
+              [
+                552,
+                561
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-200",
+          "CWE-863"
+        ],
+        "published": "2026-08-06",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-47pj-3jcm-6whg",
+          "cve_id": "CVE-2026-71433",
+          "cwes": [
+            "CWE-200",
+            "CWE-863"
+          ],
+          "package": "langgraph-checkpoint-postgres",
+          "summary": "LangGraph: Namespace prefix matching crosses segment boundaries in Postgres and SQLite stores",
+          "fix_commit": "66ebe1a0da921e73f0f9f879ba105d314c079f7c",
+          "vuln_commit": "41341457342327166d72fc11952ab28fb61ec0bf",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-47pj-3jcm-6whg"
+        },
+        "pair_id": "GHSA-47pj-3jcm-6whg"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 17.390487666940317,
+      "error": "",
+      "changed_files": 6,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 3.962,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-47pj-3jcm-6whg:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "langchain-ai/langgraph",
+          "pr_number": 0,
+          "base_sha": "41341457342327166d72fc11952ab28fb61ec0bf",
+          "head_sha": "66ebe1a0da921e73f0f9f879ba105d314c079f7c",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-47pj-3jcm-6whg"
+        },
+        "pr_task": {
+          "repo": "langchain-ai/langgraph",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/langchain-ai__langgraph/src/413414573423",
+          "head_dir": ".pr_review/cache/langchain-ai__langgraph/src/66ebe1a0da92",
+          "title": "Apply 66ebe1a0da92",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-200",
+          "CWE-863"
+        ],
+        "published": "2026-08-06",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-47pj-3jcm-6whg",
+          "cve_id": "CVE-2026-71433",
+          "cwes": [
+            "CWE-200",
+            "CWE-863"
+          ],
+          "package": "langgraph-checkpoint-postgres",
+          "summary": "LangGraph: Namespace prefix matching crosses segment boundaries in Postgres and SQLite stores",
+          "fix_commit": "66ebe1a0da921e73f0f9f879ba105d314c079f7c",
+          "vuln_commit": "41341457342327166d72fc11952ab28fb61ec0bf",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-47pj-3jcm-6whg"
+        },
+        "pair_id": "GHSA-47pj-3jcm-6whg"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 16.93003720906563,
+      "error": "",
+      "changed_files": 8,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 6,
+          "duration_s": 4.088,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 6,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-3cg5-48j3-v4gv:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "base_sha": "915ef7d0798d3175819cedbb2f62d7bf0db78c98",
+          "head_sha": "305880f2e2aeb2dda2f4b2a18a20bdcd558f7134",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-3cg5-48j3-v4gv"
+        },
+        "pr_task": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/open-webui__open-webui/src/915ef7d0798d",
+          "head_dir": ".pr_review/cache/open-webui__open-webui/src/305880f2e2ae",
+          "title": "Revert 915ef7d0798d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-862",
+            "file": "backend/open_webui/routers/folders.py",
+            "spans": [
+              [
+                631,
+                644
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-862",
+          "CWE-863"
+        ],
+        "published": "2026-08-04",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-3cg5-48j3-v4gv",
+          "cve_id": "CVE-2026-70494",
+          "cwes": [
+            "CWE-862",
+            "CWE-863"
+          ],
+          "package": "open-webui",
+          "summary": "Open WebUI: A folder write-collaborator can permanently delete the owner's chats by deleting a shared subfolder",
+          "fix_commit": "915ef7d0798d3175819cedbb2f62d7bf0db78c98",
+          "vuln_commit": "305880f2e2aeb2dda2f4b2a18a20bdcd558f7134",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-3cg5-48j3-v4gv"
+        },
+        "pair_id": "GHSA-3cg5-48j3-v4gv"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 17.242253666045144,
+      "error": "",
+      "changed_files": 1,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 3.249,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-3cg5-48j3-v4gv:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "base_sha": "305880f2e2aeb2dda2f4b2a18a20bdcd558f7134",
+          "head_sha": "915ef7d0798d3175819cedbb2f62d7bf0db78c98",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-3cg5-48j3-v4gv"
+        },
+        "pr_task": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/open-webui__open-webui/src/305880f2e2ae",
+          "head_dir": ".pr_review/cache/open-webui__open-webui/src/915ef7d0798d",
+          "title": "Apply 915ef7d0798d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-862",
+          "CWE-863"
+        ],
+        "published": "2026-08-04",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-3cg5-48j3-v4gv",
+          "cve_id": "CVE-2026-70494",
+          "cwes": [
+            "CWE-862",
+            "CWE-863"
+          ],
+          "package": "open-webui",
+          "summary": "Open WebUI: A folder write-collaborator can permanently delete the owner's chats by deleting a shared subfolder",
+          "fix_commit": "915ef7d0798d3175819cedbb2f62d7bf0db78c98",
+          "vuln_commit": "305880f2e2aeb2dda2f4b2a18a20bdcd558f7134",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-3cg5-48j3-v4gv"
+        },
+        "pair_id": "GHSA-3cg5-48j3-v4gv"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 17.573243792168796,
+      "error": "",
+      "changed_files": 1,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 3.752,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-2f54-p244-32q6:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "base_sha": "3ab2026262ef6f09810e4d235c5f9a9cb903e595",
+          "head_sha": "147c3b6ac8b5e63b14933cd1e5fafb2c9804929a",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-2f54-p244-32q6"
+        },
+        "pr_task": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/open-webui__open-webui/src/3ab2026262ef",
+          "head_dir": ".pr_review/cache/open-webui__open-webui/src/147c3b6ac8b5",
+          "title": "Revert 3ab2026262ef",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-1333",
+            "file": "backend/open_webui/tools/knowledge_fs.py",
+            "spans": [
+              [
+                62,
+                64
+              ],
+              [
+                66,
+                66
+              ],
+              [
+                1134,
+                1134
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-04",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-2f54-p244-32q6",
+          "cve_id": "CVE-2026-70493",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "open-webui",
+          "summary": "Open WebUI: Any authenticated user can stall a worker via a knowledge-search pattern that backtracks catastrophically",
+          "fix_commit": "3ab2026262ef6f09810e4d235c5f9a9cb903e595",
+          "vuln_commit": "147c3b6ac8b5e63b14933cd1e5fafb2c9804929a",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-2f54-p244-32q6"
+        },
+        "pair_id": "GHSA-2f54-p244-32q6"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 18.00488454196602,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 3.585,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-2f54-p244-32q6:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "base_sha": "147c3b6ac8b5e63b14933cd1e5fafb2c9804929a",
+          "head_sha": "3ab2026262ef6f09810e4d235c5f9a9cb903e595",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-2f54-p244-32q6"
+        },
+        "pr_task": {
+          "repo": "open-webui/open-webui",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/open-webui__open-webui/src/147c3b6ac8b5",
+          "head_dir": ".pr_review/cache/open-webui__open-webui/src/3ab2026262ef",
+          "title": "Apply 3ab2026262ef",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-1333"
+        ],
+        "published": "2026-08-04",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-2f54-p244-32q6",
+          "cve_id": "CVE-2026-70493",
+          "cwes": [
+            "CWE-1333"
+          ],
+          "package": "open-webui",
+          "summary": "Open WebUI: Any authenticated user can stall a worker via a knowledge-search pattern that backtracks catastrophically",
+          "fix_commit": "3ab2026262ef6f09810e4d235c5f9a9cb903e595",
+          "vuln_commit": "147c3b6ac8b5e63b14933cd1e5fafb2c9804929a",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-2f54-p244-32q6"
+        },
+        "pair_id": "GHSA-2f54-p244-32q6"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 17.39279762492515,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 3.595,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-mfx4-hv73-q22v:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "base_sha": "6ae358f0983c3f4d6f67692b2f8e65dc8e091c98",
+          "head_sha": "c852173947406e2eca65957535ff17d3a4035a03",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-mfx4-hv73-q22v"
+        },
+        "pr_task": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aio-libs__aiohttp/src/6ae358f0983c",
+          "head_dir": ".pr_review/cache/aio-libs__aiohttp/src/c85217394740",
+          "title": "Revert 6ae358f0983c",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-444",
+            "file": "aiohttp/http_parser.py",
+            "spans": [
+              [
+                427,
+                429
+              ],
+              [
+                441,
+                442
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-444"
+        ],
+        "published": "2026-08-03",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-mfx4-hv73-q22v",
+          "cve_id": "CVE-2026-69243",
+          "cwes": [
+            "CWE-444"
+          ],
+          "package": "aiohttp",
+          "summary": "AIOHTTP: HTTP request smuggling via WebSocket upgrade",
+          "fix_commit": "6ae358f0983c3f4d6f67692b2f8e65dc8e091c98",
+          "vuln_commit": "c852173947406e2eca65957535ff17d3a4035a03",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-mfx4-hv73-q22v"
+        },
+        "pair_id": "GHSA-mfx4-hv73-q22v"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 13.573396624997258,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "CHANGES/13016.bugfix.rst",
+          "hunk_ids": [
+            "aec83dfa9c44:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 4,
+          "duration_s": 4.176,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 5,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-mfx4-hv73-q22v:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "base_sha": "c852173947406e2eca65957535ff17d3a4035a03",
+          "head_sha": "6ae358f0983c3f4d6f67692b2f8e65dc8e091c98",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-mfx4-hv73-q22v"
+        },
+        "pr_task": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aio-libs__aiohttp/src/c85217394740",
+          "head_dir": ".pr_review/cache/aio-libs__aiohttp/src/6ae358f0983c",
+          "title": "Apply 6ae358f0983c",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-444"
+        ],
+        "published": "2026-08-03",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-mfx4-hv73-q22v",
+          "cve_id": "CVE-2026-69243",
+          "cwes": [
+            "CWE-444"
+          ],
+          "package": "aiohttp",
+          "summary": "AIOHTTP: HTTP request smuggling via WebSocket upgrade",
+          "fix_commit": "6ae358f0983c3f4d6f67692b2f8e65dc8e091c98",
+          "vuln_commit": "c852173947406e2eca65957535ff17d3a4035a03",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-mfx4-hv73-q22v"
+        },
+        "pair_id": "GHSA-mfx4-hv73-q22v"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 14.522606500191614,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "CHANGES/13016.bugfix.rst",
+          "hunk_ids": [
+            "aec83dfa9c44:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 5,
+          "duration_s": 4.612,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 4,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-mq44-7p77-q5h7:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "base_sha": "47fb6ae354d4fa22048f4dbe7dbf82b625f0a2f6",
+          "head_sha": "c5293938af13b3efbcd77619d34501cbaa255c2a",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-mq44-7p77-q5h7"
+        },
+        "pr_task": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aio-libs__aiohttp/src/47fb6ae354d4",
+          "head_dir": ".pr_review/cache/aio-libs__aiohttp/src/c5293938af13",
+          "title": "Revert 47fb6ae354d4",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-20",
+            "file": "aiohttp/_websocket/reader_py.py",
+            "spans": [
+              [
+                141,
+                142
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-20",
+            "file": "aiohttp/client.py",
+            "spans": [
+              [
+                1373,
+                1373
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-20"
+        ],
+        "published": "2026-08-03",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-mq44-7p77-q5h7",
+          "cve_id": "CVE-2026-59881",
+          "cwes": [
+            "CWE-20"
+          ],
+          "package": "aiohttp",
+          "summary": "AIOHTTP: WebSocket client accepts compressed frames without negotiated permessage-deflate",
+          "fix_commit": "47fb6ae354d4fa22048f4dbe7dbf82b625f0a2f6",
+          "vuln_commit": "c5293938af13b3efbcd77619d34501cbaa255c2a",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-mq44-7p77-q5h7"
+        },
+        "pair_id": "GHSA-mq44-7p77-q5h7"
+      },
+      "findings": [
+        {
+          "id": "61f76e62-8f7d-4b43-8d59-c0afbf950fe1",
+          "fingerprint": "5fc0c0ae3468fe08",
+          "title": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable",
+          "taxonomy": {
+            "internal": "CRY-WEAK-ALGO",
+            "family": "Cryptographic Failures",
+            "owasp_2025": "A04",
+            "cwe": [
+              "CWE-327",
+              "CWE-328"
+            ],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "aiohttp/client.py",
+            "start_line": 1289,
+            "end_line": 1289,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "aiohttp/client.py",
+              "lines": "1289",
+              "snippet": "match = base64.b64encode(hashlib.sha1(sec_key + WS_KEY).digest()).decode()",
+              "why": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Use a current algorithm (SHA-256+/AES-GCM) for security purposes.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-sha1",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:35:16.644889Z"
+        }
+      ],
+      "pre_existing": 1,
+      "verdict": "approved",
+      "wall_s": 11.790792291983962,
+      "error": "",
+      "changed_files": 7,
+      "dropped": [
+        {
+          "path": "CHANGES/12976.bugfix.rst",
+          "hunk_ids": [
+            "fb845c5d30fd:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "THREAT_MODEL.md",
+          "hunk_ids": [
+            "29aec4b5fd1f:h1",
+            "29aec4b5fd1f:h2"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 1,
+          "results": 1,
+          "mapped_exact": 0,
+          "mapped_heuristic": 1,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [
+            "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-sha1"
+          ],
+          "unmapped_rules": [],
+          "files": 8,
+          "duration_s": 3.345,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 1,
+          "paths": 9,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-mq44-7p77-q5h7:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "base_sha": "c5293938af13b3efbcd77619d34501cbaa255c2a",
+          "head_sha": "47fb6ae354d4fa22048f4dbe7dbf82b625f0a2f6",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-mq44-7p77-q5h7"
+        },
+        "pr_task": {
+          "repo": "aio-libs/aiohttp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aio-libs__aiohttp/src/c5293938af13",
+          "head_dir": ".pr_review/cache/aio-libs__aiohttp/src/47fb6ae354d4",
+          "title": "Apply 47fb6ae354d4",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-20"
+        ],
+        "published": "2026-08-03",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-mq44-7p77-q5h7",
+          "cve_id": "CVE-2026-59881",
+          "cwes": [
+            "CWE-20"
+          ],
+          "package": "aiohttp",
+          "summary": "AIOHTTP: WebSocket client accepts compressed frames without negotiated permessage-deflate",
+          "fix_commit": "47fb6ae354d4fa22048f4dbe7dbf82b625f0a2f6",
+          "vuln_commit": "c5293938af13b3efbcd77619d34501cbaa255c2a",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-mq44-7p77-q5h7"
+        },
+        "pair_id": "GHSA-mq44-7p77-q5h7"
+      },
+      "findings": [],
+      "pre_existing": 1,
+      "verdict": "approved",
+      "wall_s": 11.820646208012477,
+      "error": "",
+      "changed_files": 7,
+      "dropped": [
+        {
+          "path": "CHANGES/12976.bugfix.rst",
+          "hunk_ids": [
+            "fb845c5d30fd:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "THREAT_MODEL.md",
+          "hunk_ids": [
+            "29aec4b5fd1f:h1",
+            "29aec4b5fd1f:h2"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 1,
+          "results": 1,
+          "mapped_exact": 0,
+          "mapped_heuristic": 1,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [
+            "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-sha1"
+          ],
+          "unmapped_rules": [],
+          "files": 9,
+          "duration_s": 3.31,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 1,
+          "paths": 8,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-m8wh-29wm-52mv:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "keras-team/keras",
+          "pr_number": 0,
+          "base_sha": "23370f16b0ab9a200f7550a34e54a3ceab74ba0e",
+          "head_sha": "ce31ac27182994b16eb7d7347d647bc16691aa8f",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-m8wh-29wm-52mv"
+        },
+        "pr_task": {
+          "repo": "keras-team/keras",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/keras-team__keras/src/23370f16b0ab",
+          "head_dir": ".pr_review/cache/keras-team__keras/src/ce31ac271829",
+          "title": "Revert 23370f16b0ab",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "keras/src/saving/file_editor.py",
+            "spans": [
+              [
+                486,
+                489
+              ],
+              [
+                493,
+                493
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-08-02",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-m8wh-29wm-52mv",
+          "cve_id": "CVE-2026-9335",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "keras",
+          "summary": "Keras: HDF5 links can disclose local file contents",
+          "fix_commit": "23370f16b0ab9a200f7550a34e54a3ceab74ba0e",
+          "vuln_commit": "ce31ac27182994b16eb7d7347d647bc16691aa8f",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-m8wh-29wm-52mv"
+        },
+        "pair_id": "GHSA-m8wh-29wm-52mv"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 25.179583417018875,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.082,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-m8wh-29wm-52mv:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "keras-team/keras",
+          "pr_number": 0,
+          "base_sha": "ce31ac27182994b16eb7d7347d647bc16691aa8f",
+          "head_sha": "23370f16b0ab9a200f7550a34e54a3ceab74ba0e",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-m8wh-29wm-52mv"
+        },
+        "pr_task": {
+          "repo": "keras-team/keras",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/keras-team__keras/src/ce31ac271829",
+          "head_dir": ".pr_review/cache/keras-team__keras/src/23370f16b0ab",
+          "title": "Apply 23370f16b0ab",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-08-02",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-m8wh-29wm-52mv",
+          "cve_id": "CVE-2026-9335",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "keras",
+          "summary": "Keras: HDF5 links can disclose local file contents",
+          "fix_commit": "23370f16b0ab9a200f7550a34e54a3ceab74ba0e",
+          "vuln_commit": "ce31ac27182994b16eb7d7347d647bc16691aa8f",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-m8wh-29wm-52mv"
+        },
+        "pair_id": "GHSA-m8wh-29wm-52mv"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 25.61125020799227,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.007,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-c5px-58j2-7fqp:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "eLyiN/gemini-bridge",
+          "pr_number": 0,
+          "base_sha": "8f3b85afd02b692c4bc974b5176e12fb277ea801",
+          "head_sha": "bb3ad9e44dba04092abc2e2a8af83223f10402db",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-c5px-58j2-7fqp"
+        },
+        "pr_task": {
+          "repo": "eLyiN/gemini-bridge",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/eLyiN__gemini-bridge/src/8f3b85afd02b",
+          "head_dir": ".pr_review/cache/eLyiN__gemini-bridge/src/bb3ad9e44dba",
+          "title": "Revert 8f3b85afd02b",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "src/mcp_server.py",
+            "spans": [
+              [
+                4,
+                4
+              ],
+              [
+                130,
+                130
+              ],
+              [
+                133,
+                136
+              ],
+              [
+                138,
+                138
+              ],
+              [
+                141,
+                143
+              ],
+              [
+                195,
+                195
+              ],
+              [
+                444,
+                444
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22",
+          "CWE-200"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-c5px-58j2-7fqp",
+          "cve_id": "CVE-2026-54785",
+          "cwes": [
+            "CWE-22",
+            "CWE-200"
+          ],
+          "package": "gemini-bridge",
+          "summary": "gemini-bridge vulnerable to arbitrary local file read via consult_gemini_with_files inline mode",
+          "fix_commit": "8f3b85afd02b692c4bc974b5176e12fb277ea801",
+          "vuln_commit": "bb3ad9e44dba04092abc2e2a8af83223f10402db",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-c5px-58j2-7fqp"
+        },
+        "pair_id": "GHSA-c5px-58j2-7fqp"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 4.996754124993458,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "CHANGELOG.md",
+          "hunk_ids": [
+            "ab09011fa121:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 5,
+          "duration_s": 2.537,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 5,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-c5px-58j2-7fqp:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "eLyiN/gemini-bridge",
+          "pr_number": 0,
+          "base_sha": "bb3ad9e44dba04092abc2e2a8af83223f10402db",
+          "head_sha": "8f3b85afd02b692c4bc974b5176e12fb277ea801",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-c5px-58j2-7fqp"
+        },
+        "pr_task": {
+          "repo": "eLyiN/gemini-bridge",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/eLyiN__gemini-bridge/src/bb3ad9e44dba",
+          "head_dir": ".pr_review/cache/eLyiN__gemini-bridge/src/8f3b85afd02b",
+          "title": "Apply 8f3b85afd02b",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-22",
+          "CWE-200"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-c5px-58j2-7fqp",
+          "cve_id": "CVE-2026-54785",
+          "cwes": [
+            "CWE-22",
+            "CWE-200"
+          ],
+          "package": "gemini-bridge",
+          "summary": "gemini-bridge vulnerable to arbitrary local file read via consult_gemini_with_files inline mode",
+          "fix_commit": "8f3b85afd02b692c4bc974b5176e12fb277ea801",
+          "vuln_commit": "bb3ad9e44dba04092abc2e2a8af83223f10402db",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-c5px-58j2-7fqp"
+        },
+        "pair_id": "GHSA-c5px-58j2-7fqp"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 5.050381625071168,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [
+        {
+          "path": "CHANGELOG.md",
+          "hunk_ids": [
+            "ab09011fa121:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 5,
+          "duration_s": 2.324,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 5,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-cj54-hpcc-gj6h:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "base_sha": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "head_sha": "471ef279700e9f79941d451acf88abe1601df875",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pr_task": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/thumbor__thumbor/src/3b986d13677b",
+          "head_dir": ".pr_review/cache/thumbor__thumbor/src/471ef279700e",
+          "title": "Revert 3b986d13677b",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "thumbor/loaders/file_loader.py",
+            "spans": [
+              [
+                19,
+                25
+              ],
+              [
+                37,
+                37
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-cj54-hpcc-gj6h",
+          "cve_id": "CVE-2026-53502",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "thumbor",
+          "summary": "Thumbor has path traversal via post-validation URL decoding bypass in file_loader",
+          "fix_commit": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "vuln_commit": "471ef279700e9f79941d451acf88abe1601df875",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pair_id": "GHSA-cj54-hpcc-gj6h"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.821249374886975,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.17,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-cj54-hpcc-gj6h:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "base_sha": "471ef279700e9f79941d451acf88abe1601df875",
+          "head_sha": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pr_task": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/thumbor__thumbor/src/471ef279700e",
+          "head_dir": ".pr_review/cache/thumbor__thumbor/src/3b986d13677b",
+          "title": "Apply 3b986d13677b",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-cj54-hpcc-gj6h",
+          "cve_id": "CVE-2026-53502",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "thumbor",
+          "summary": "Thumbor has path traversal via post-validation URL decoding bypass in file_loader",
+          "fix_commit": "3b986d13677b30fe6651c8c72ebb25957ac0a40d",
+          "vuln_commit": "471ef279700e9f79941d451acf88abe1601df875",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-cj54-hpcc-gj6h"
+        },
+        "pair_id": "GHSA-cj54-hpcc-gj6h"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.711456459015608,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.149,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-phj3-59pf-cp83:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "base_sha": "2c716119de986cfc68c7071af52a98187e006023",
+          "head_sha": "e3ae3e2500537b4d735df4144129a649374bb70b",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-phj3-59pf-cp83"
+        },
+        "pr_task": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/thumbor__thumbor/src/2c716119de98",
+          "head_dir": ".pr_review/cache/thumbor__thumbor/src/e3ae3e250053",
+          "title": "Revert 2c716119de98",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "thumbor/filters/proportion.py",
+            "spans": [
+              [
+                13,
+                18
+              ]
+            ],
+            "note": "the fix only added; span is the insertion point"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-phj3-59pf-cp83",
+          "cve_id": "CVE-2026-53505",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "thumbor",
+          "summary": "Thumbor proportion filter allows unbounded post-transform resize leading to remote DoS",
+          "fix_commit": "2c716119de986cfc68c7071af52a98187e006023",
+          "vuln_commit": "e3ae3e2500537b4d735df4144129a649374bb70b",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-phj3-59pf-cp83"
+        },
+        "pair_id": "GHSA-phj3-59pf-cp83"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.920378292212263,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.35,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-phj3-59pf-cp83:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "base_sha": "e3ae3e2500537b4d735df4144129a649374bb70b",
+          "head_sha": "2c716119de986cfc68c7071af52a98187e006023",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-phj3-59pf-cp83"
+        },
+        "pr_task": {
+          "repo": "thumbor/thumbor",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/thumbor__thumbor/src/e3ae3e250053",
+          "head_dir": ".pr_review/cache/thumbor__thumbor/src/2c716119de98",
+          "title": "Apply 2c716119de98",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-phj3-59pf-cp83",
+          "cve_id": "CVE-2026-53505",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "thumbor",
+          "summary": "Thumbor proportion filter allows unbounded post-transform resize leading to remote DoS",
+          "fix_commit": "2c716119de986cfc68c7071af52a98187e006023",
+          "vuln_commit": "e3ae3e2500537b4d735df4144129a649374bb70b",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-phj3-59pf-cp83"
+        },
+        "pair_id": "GHSA-phj3-59pf-cp83"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.035302208038047,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.339,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-22p9-r2f5-22mf:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "head_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/48f31cfac077",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "title": "Revert 48f31cfac077",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-59",
+            "file": "cli/onionshare_cli/web/send_base_mode.py",
+            "spans": [
+              [
+                113,
+                113
+              ],
+              [
+                130,
+                130
+              ],
+              [
+                134,
+                134
+              ],
+              [
+                156,
+                156
+              ],
+              [
+                166,
+                166
+              ],
+              [
+                181,
+                181
+              ],
+              [
+                185,
+                185
+              ],
+              [
+                259,
+                259
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-59",
+            "file": "cli/onionshare_cli/web/share_mode.py",
+            "spans": [
+              [
+                303,
+                305
+              ],
+              [
+                352,
+                352
+              ],
+              [
+                588,
+                588
+              ],
+              [
+                595,
+                599
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-59"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-22p9-r2f5-22mf",
+          "cve_id": "CVE-2026-54706",
+          "cwes": [
+            "CWE-59"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare follows symlinks in shared directories, allowing unintended disclosure of local files",
+          "fix_commit": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pair_id": "GHSA-22p9-r2f5-22mf"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.160433750133961,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.792,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-22p9-r2f5-22mf:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "head_sha": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/48f31cfac077",
+          "title": "Apply 48f31cfac077",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-59"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-22p9-r2f5-22mf",
+          "cve_id": "CVE-2026-54706",
+          "cwes": [
+            "CWE-59"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare follows symlinks in shared directories, allowing unintended disclosure of local files",
+          "fix_commit": "48f31cfac077fcc9c04c67c2a6dbf87d956f5eec",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-22p9-r2f5-22mf"
+        },
+        "pair_id": "GHSA-22p9-r2f5-22mf"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.235576541861519,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 2.586,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-v833-3823-cmhp:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "a090e97193efc91fbeac9dace7793ea568b83cf5",
+          "head_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-v833-3823-cmhp"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/a090e97193ef",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "title": "Revert a090e97193ef",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-863",
+            "file": "cli/onionshare_cli/web/receive_mode.py",
+            "spans": [
+              [
+                94,
+                94
+              ],
+              [
+                97,
+                97
+              ],
+              [
+                197,
+                200
+              ],
+              [
+                231,
+                231
+              ],
+              [
+                590,
+                591
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-863"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-v833-3823-cmhp",
+          "cve_id": "CVE-2026-54707",
+          "cwes": [
+            "CWE-863"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare Receive mode writes uploaded files even when file uploads are disabled",
+          "fix_commit": "a090e97193efc91fbeac9dace7793ea568b83cf5",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-v833-3823-cmhp"
+        },
+        "pair_id": "GHSA-v833-3823-cmhp"
+      },
+      "findings": [
+        {
+          "id": "ad369a6a-5d65-4a47-b680-3de0c5c3922b",
+          "fingerprint": "154ff7fcf0c13399",
+          "title": "These permissions `0o700` are widely permissive and grant access to more people than may be necessary. A good default is",
+          "taxonomy": {
+            "internal": "TOOL-UNMAPPED",
+            "family": "Unmapped",
+            "owasp_2025": "",
+            "cwe": [],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 3,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "desktop/tests/test_gui_receive.py",
+            "start_line": 175,
+            "end_line": 175,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "desktop/tests/test_gui_receive.py",
+              "lines": "175",
+              "snippet": "os.chmod(upload_dir, 0o700)",
+              "why": "These permissions `0o700` are widely permissive and grant access to more people than may be necessary. A good default is `0o644` which gives read and write access to yourself and read access to everyone else."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Review the flagged construct and apply the tool's guidance for this rule.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:37:23.346361Z"
+        }
+      ],
+      "pre_existing": 1,
+      "verdict": "approved",
+      "wall_s": 11.833272207994014,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 1,
+          "results": 1,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 1,
+          "heuristic_rules": [],
+          "unmapped_rules": [
+            "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions"
+          ],
+          "files": 2,
+          "duration_s": 5.743,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 1,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-v833-3823-cmhp:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "base_sha": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "head_sha": "a090e97193efc91fbeac9dace7793ea568b83cf5",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-v833-3823-cmhp"
+        },
+        "pr_task": {
+          "repo": "onionshare/onionshare",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/onionshare__onionshare/src/8cc75e1d7e88",
+          "head_dir": ".pr_review/cache/onionshare__onionshare/src/a090e97193ef",
+          "title": "Apply a090e97193ef",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-863"
+        ],
+        "published": "2026-07-31",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-v833-3823-cmhp",
+          "cve_id": "CVE-2026-54707",
+          "cwes": [
+            "CWE-863"
+          ],
+          "package": "onionshare-cli",
+          "summary": "OnionShare Receive mode writes uploaded files even when file uploads are disabled",
+          "fix_commit": "a090e97193efc91fbeac9dace7793ea568b83cf5",
+          "vuln_commit": "8cc75e1d7e88bd31f7276733449d412bf71c8999",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-v833-3823-cmhp"
+        },
+        "pair_id": "GHSA-v833-3823-cmhp"
+      },
+      "findings": [],
+      "pre_existing": 1,
+      "verdict": "approved",
+      "wall_s": 7.68149883300066,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 1,
+          "results": 1,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 1,
+          "heuristic_rules": [],
+          "unmapped_rules": [
+            "python.lang.security.audit.insecure-file-permissions.insecure-file-permissions"
+          ],
+          "files": 2,
+          "duration_s": 2.986,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 1,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-7h3g-4w2f-fj2f:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "base_sha": "98aff324b7d8500ff75a8ca9ac087ee636be4716",
+          "head_sha": "d6dff97aee4736e5940820c832866feb48c82428",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-7h3g-4w2f-fj2f"
+        },
+        "pr_task": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/termux__proot-distro/src/98aff324b7d8",
+          "head_dir": ".pr_review/cache/termux__proot-distro/src/d6dff97aee47",
+          "title": "Revert 98aff324b7d8",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-668",
+            "file": "proot_distro/commands/help/pages.py",
+            "spans": [
+              [
+                621,
+                626
+              ]
+            ],
+            "note": "the fix only added; span is the insertion point"
+          },
+          {
+            "cwe": "CWE-668",
+            "file": "proot_distro/commands/restore.py",
+            "spans": [
+              [
+                221,
+                221
+              ],
+              [
+                250,
+                250
+              ],
+              [
+                271,
+                273
+              ],
+              [
+                306,
+                309
+              ],
+              [
+                319,
+                319
+              ],
+              [
+                321,
+                324
+              ],
+              [
+                362,
+                362
+              ],
+              [
+                437,
+                437
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-668"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-7h3g-4w2f-fj2f",
+          "cve_id": "CVE-2026-54727",
+          "cwes": [
+            "CWE-668"
+          ],
+          "package": "proot-distro",
+          "summary": "proot-distro has a Container Isolation Bypass via Crafted Restore Archive",
+          "fix_commit": "98aff324b7d8500ff75a8ca9ac087ee636be4716",
+          "vuln_commit": "d6dff97aee4736e5940820c832866feb48c82428",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-7h3g-4w2f-fj2f"
+        },
+        "pair_id": "GHSA-7h3g-4w2f-fj2f"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.167015000013635,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 2.999,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-7h3g-4w2f-fj2f:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "base_sha": "d6dff97aee4736e5940820c832866feb48c82428",
+          "head_sha": "98aff324b7d8500ff75a8ca9ac087ee636be4716",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-7h3g-4w2f-fj2f"
+        },
+        "pr_task": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/termux__proot-distro/src/d6dff97aee47",
+          "head_dir": ".pr_review/cache/termux__proot-distro/src/98aff324b7d8",
+          "title": "Apply 98aff324b7d8",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-668"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-7h3g-4w2f-fj2f",
+          "cve_id": "CVE-2026-54727",
+          "cwes": [
+            "CWE-668"
+          ],
+          "package": "proot-distro",
+          "summary": "proot-distro has a Container Isolation Bypass via Crafted Restore Archive",
+          "fix_commit": "98aff324b7d8500ff75a8ca9ac087ee636be4716",
+          "vuln_commit": "d6dff97aee4736e5940820c832866feb48c82428",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-7h3g-4w2f-fj2f"
+        },
+        "pair_id": "GHSA-7h3g-4w2f-fj2f"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.59784279204905,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 3.088,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-9xq3-3fqg-4vg7:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "base_sha": "a96d7a9667f38e45d812614852ee3915d1c0ae45",
+          "head_sha": "f5ff24beef945fcfe04831a913602169c17e97f6",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-9xq3-3fqg-4vg7"
+        },
+        "pr_task": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/termux__proot-distro/src/a96d7a9667f3",
+          "head_dir": ".pr_review/cache/termux__proot-distro/src/f5ff24beef94",
+          "title": "Revert a96d7a9667f3",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-61",
+            "file": "proot_distro/commands/restore.py",
+            "spans": [
+              [
+                320,
+                320
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-61",
+            "file": "proot_distro/helpers/build_engine/copy_step.py",
+            "spans": [
+              [
+                433,
+                433
+              ],
+              [
+                436,
+                437
+              ]
+            ],
+            "note": "lines the fix removed"
+          },
+          {
+            "cwe": "CWE-61",
+            "file": "proot_distro/helpers/tar_extract.py",
+            "spans": [
+              [
+                95,
+                96
+              ],
+              [
+                136,
+                140
+              ],
+              [
+                159,
+                159
+              ],
+              [
+                205,
+                205
+              ],
+              [
+                221,
+                222
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-61"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-9xq3-3fqg-4vg7",
+          "cve_id": "CVE-2026-54574",
+          "cwes": [
+            "CWE-61"
+          ],
+          "package": "proot-distro",
+          "summary": "`proot-distro install` has a Symlink Escape (Arbitrary Host File Write) via Malicious Tar Archive",
+          "fix_commit": "a96d7a9667f38e45d812614852ee3915d1c0ae45",
+          "vuln_commit": "f5ff24beef945fcfe04831a913602169c17e97f6",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-9xq3-3fqg-4vg7"
+        },
+        "pair_id": "GHSA-9xq3-3fqg-4vg7"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 8.995694250101224,
+      "error": "",
+      "changed_files": 6,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 5.307,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-9xq3-3fqg-4vg7:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "base_sha": "f5ff24beef945fcfe04831a913602169c17e97f6",
+          "head_sha": "a96d7a9667f38e45d812614852ee3915d1c0ae45",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-9xq3-3fqg-4vg7"
+        },
+        "pr_task": {
+          "repo": "termux/proot-distro",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/termux__proot-distro/src/f5ff24beef94",
+          "head_dir": ".pr_review/cache/termux__proot-distro/src/a96d7a9667f3",
+          "title": "Apply a96d7a9667f3",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-61"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-9xq3-3fqg-4vg7",
+          "cve_id": "CVE-2026-54574",
+          "cwes": [
+            "CWE-61"
+          ],
+          "package": "proot-distro",
+          "summary": "`proot-distro install` has a Symlink Escape (Arbitrary Host File Write) via Malicious Tar Archive",
+          "fix_commit": "a96d7a9667f38e45d812614852ee3915d1c0ae45",
+          "vuln_commit": "f5ff24beef945fcfe04831a913602169c17e97f6",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-9xq3-3fqg-4vg7"
+        },
+        "pair_id": "GHSA-9xq3-3fqg-4vg7"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 7.78522895812057,
+      "error": "",
+      "changed_files": 6,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 2.754,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-f42x-p2mx-hm8r:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "brightio/penelope",
+          "pr_number": 0,
+          "base_sha": "a040afb5db32c7e80b5e8a2f9b2164cf911cfa62",
+          "head_sha": "ef417fff6cfb2ab02f3303949fe60a4f163d0ed5",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-f42x-p2mx-hm8r"
+        },
+        "pr_task": {
+          "repo": "brightio/penelope",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/brightio__penelope/src/a040afb5db32",
+          "head_dir": ".pr_review/cache/brightio__penelope/src/ef417fff6cfb",
+          "title": "Revert a040afb5db32",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "penelope.py",
+            "spans": [
+              [
+                3407,
+                3413
+              ],
+              [
+                3415,
+                3421
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-f42x-p2mx-hm8r",
+          "cve_id": "CVE-2026-50558",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "penelope-shell-handler",
+          "summary": "Penelope unsafe tar extraction allows arbitrary local file write via crafted session archive",
+          "fix_commit": "a040afb5db32c7e80b5e8a2f9b2164cf911cfa62",
+          "vuln_commit": "ef417fff6cfb2ab02f3303949fe60a4f163d0ed5",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-f42x-p2mx-hm8r"
+        },
+        "pair_id": "GHSA-f42x-p2mx-hm8r"
+      },
+      "findings": [
+        {
+          "id": "61f63634-7b94-45d2-a0bb-6dae3d647d16",
+          "fingerprint": "36b931c6a30b102c",
+          "title": "Unverified SSL context detected. This will permit insecure connections without verifying SSL certificates. Use 'ssl.crea",
+          "taxonomy": {
+            "internal": "CRY-NO-TLS",
+            "family": "Cryptographic Failures",
+            "owasp_2025": "A04",
+            "cwe": [
+              "CWE-319"
+            ],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "penelope.py",
+            "start_line": 5236,
+            "end_line": 5236,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "penelope.py",
+              "lines": "5236",
+              "snippet": "ctx = ssl.create_default_context() if options.verify_ssl_cert else ssl._create_unverified_context()",
+              "why": "Unverified SSL context detected. This will permit insecure connections without verifying SSL certificates. Use 'ssl.create_default_context' instead."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Use TLS and leave certificate verification enabled.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.unverified-ssl-context.unverified-ssl-context",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:38:17.060128Z"
+        },
+        {
+          "id": "e581ed41-0889-4574-99d7-7bd2fd850454",
+          "fingerprint": "e403f922fcf77e7d",
+          "title": "Unverified SSL context detected. This will permit insecure connections without verifying SSL certificates. Use 'ssl.crea",
+          "taxonomy": {
+            "internal": "CRY-NO-TLS",
+            "family": "Cryptographic Failures",
+            "owasp_2025": "A04",
+            "cwe": [
+              "CWE-319"
+            ],
+            "asvs": []
+          },
+          "severity": "medium",
+          "cvss_vector": null,
+          "confidence": 5,
+          "status": "pre_existing",
+          "introduced_by_pr": false,
+          "location": {
+            "file": "penelope.py",
+            "start_line": 5250,
+            "end_line": 5250,
+            "symbol": null
+          },
+          "data_flow": [],
+          "evidence": [
+            {
+              "file": "penelope.py",
+              "lines": "5250",
+              "snippet": "ctx = ssl._create_unverified_context()",
+              "why": "Unverified SSL context detected. This will permit insecure connections without verifying SSL certificates. Use 'ssl.create_default_context' instead."
+            }
+          ],
+          "reachability": {
+            "entry": null,
+            "attacker_reachable": null,
+            "guards": []
+          },
+          "remediation": {
+            "summary": "Use TLS and leave certificate verification enabled.",
+            "suggested_diff": null,
+            "effort": "medium"
+          },
+          "provenance": {
+            "detector": "sast",
+            "tool": "semgrep",
+            "rule_id": "python.lang.security.unverified-ssl-context.unverified-ssl-context",
+            "also_detected_by": [],
+            "session_uri": null,
+            "inference_question": null,
+            "contributor_id": null,
+            "commit_sha": null,
+            "model": null
+          },
+          "verification": {
+            "verdict": "unverified",
+            "verifier_model": null,
+            "refutation_attempts": [],
+            "severity_adjustment": null,
+            "confidence_adjustment": null
+          },
+          "created_at": "2026-08-21T20:38:17.060264Z"
+        }
+      ],
+      "pre_existing": 2,
+      "verdict": "approved",
+      "wall_s": 23.530292375013232,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 2,
+          "results": 2,
+          "mapped_exact": 0,
+          "mapped_heuristic": 2,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [
+            "python.lang.security.unverified-ssl-context.unverified-ssl-context"
+          ],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 11.046,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 2,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-f42x-p2mx-hm8r:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "brightio/penelope",
+          "pr_number": 0,
+          "base_sha": "ef417fff6cfb2ab02f3303949fe60a4f163d0ed5",
+          "head_sha": "a040afb5db32c7e80b5e8a2f9b2164cf911cfa62",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-f42x-p2mx-hm8r"
+        },
+        "pr_task": {
+          "repo": "brightio/penelope",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/brightio__penelope/src/ef417fff6cfb",
+          "head_dir": ".pr_review/cache/brightio__penelope/src/a040afb5db32",
+          "title": "Apply a040afb5db32",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-22"
+        ],
+        "published": "2026-07-29",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-f42x-p2mx-hm8r",
+          "cve_id": "CVE-2026-50558",
+          "cwes": [
+            "CWE-22"
+          ],
+          "package": "penelope-shell-handler",
+          "summary": "Penelope unsafe tar extraction allows arbitrary local file write via crafted session archive",
+          "fix_commit": "a040afb5db32c7e80b5e8a2f9b2164cf911cfa62",
+          "vuln_commit": "ef417fff6cfb2ab02f3303949fe60a4f163d0ed5",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-f42x-p2mx-hm8r"
+        },
+        "pair_id": "GHSA-f42x-p2mx-hm8r"
+      },
+      "findings": [],
+      "pre_existing": 2,
+      "verdict": "approved",
+      "wall_s": 23.782905333908275,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 2,
+          "results": 2,
+          "mapped_exact": 0,
+          "mapped_heuristic": 2,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [
+            "python.lang.security.unverified-ssl-context.unverified-ssl-context"
+          ],
+          "unmapped_rules": [],
+          "files": 1,
+          "duration_s": 11.552,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 2,
+          "paths": 1,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-wjv6-jcfj-mf9r:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "base_sha": "b73abb5cd703a50471b8950bbd3bd0b82ad71de7",
+          "head_sha": "bcfdf30660ac4a17ea54400351c9aa4f3391f60e",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-wjv6-jcfj-mf9r"
+        },
+        "pr_task": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/b73abb5cd703",
+          "head_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/bcfdf30660ac",
+          "title": "Revert b73abb5cd703",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-94",
+            "file": "src/datamodel_code_generator/model/base.py",
+            "spans": [
+              [
+                1004,
+                1004
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-94",
+          "CWE-1336"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-wjv6-jcfj-mf9r",
+          "cve_id": "CVE-2026-54654",
+          "cwes": [
+            "CWE-94",
+            "CWE-1336"
+          ],
+          "package": "datamodel-code-generator",
+          "summary": "`datamodel-code-generator` vulnerable to code injection via unescaped carriage return in `--extra-template-data` `comment` field",
+          "fix_commit": "b73abb5cd703a50471b8950bbd3bd0b82ad71de7",
+          "vuln_commit": "bcfdf30660ac4a17ea54400351c9aa4f3391f60e",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-wjv6-jcfj-mf9r"
+        },
+        "pair_id": "GHSA-wjv6-jcfj-mf9r"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 27.30389325018041,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 4.152,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-wjv6-jcfj-mf9r:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "base_sha": "bcfdf30660ac4a17ea54400351c9aa4f3391f60e",
+          "head_sha": "b73abb5cd703a50471b8950bbd3bd0b82ad71de7",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-wjv6-jcfj-mf9r"
+        },
+        "pr_task": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/bcfdf30660ac",
+          "head_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/b73abb5cd703",
+          "title": "Apply b73abb5cd703",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-94",
+          "CWE-1336"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-wjv6-jcfj-mf9r",
+          "cve_id": "CVE-2026-54654",
+          "cwes": [
+            "CWE-94",
+            "CWE-1336"
+          ],
+          "package": "datamodel-code-generator",
+          "summary": "`datamodel-code-generator` vulnerable to code injection via unescaped carriage return in `--extra-template-data` `comment` field",
+          "fix_commit": "b73abb5cd703a50471b8950bbd3bd0b82ad71de7",
+          "vuln_commit": "bcfdf30660ac4a17ea54400351c9aa4f3391f60e",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-wjv6-jcfj-mf9r"
+        },
+        "pair_id": "GHSA-wjv6-jcfj-mf9r"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 27.151925333077088,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 3,
+          "duration_s": 4.179,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 3,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-8359-h9fx-j6v9:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "base_sha": "2ff4a72b4550a2b2069754c5b075b1655067e5fb",
+          "head_sha": "2dbe5b5794472a4cad8e9286c942dffda7359816",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-8359-h9fx-j6v9"
+        },
+        "pr_task": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/2ff4a72b4550",
+          "head_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/2dbe5b579447",
+          "title": "Revert 2ff4a72b4550",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-22",
+            "file": "src/datamodel_code_generator/parser/jsonschema.py",
+            "spans": [
+              [
+                4815,
+                4815
+              ],
+              [
+                4819,
+                4819
+              ],
+              [
+                4825,
+                4825
+              ],
+              [
+                4881,
+                4881
+              ],
+              [
+                4883,
+                4883
+              ],
+              [
+                4893,
+                4893
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-22",
+          "CWE-200",
+          "CWE-610"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-8359-h9fx-j6v9",
+          "cve_id": "CVE-2026-55389",
+          "cwes": [
+            "CWE-22",
+            "CWE-200",
+            "CWE-610"
+          ],
+          "package": "datamodel-code-generator",
+          "summary": "datamodel-code-generator vulnerable to arbitrary local file read via JSON-Schema `$ref` (`file://` and `../` traversal), bypassing `--no-allow-remote-refs`",
+          "fix_commit": "2ff4a72b4550a2b2069754c5b075b1655067e5fb",
+          "vuln_commit": "2dbe5b5794472a4cad8e9286c942dffda7359816",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-8359-h9fx-j6v9"
+        },
+        "pair_id": "GHSA-8359-h9fx-j6v9"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 48.494187250034884,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 4,
+          "duration_s": 14.823,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 4,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-8359-h9fx-j6v9:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "base_sha": "2dbe5b5794472a4cad8e9286c942dffda7359816",
+          "head_sha": "2ff4a72b4550a2b2069754c5b075b1655067e5fb",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-8359-h9fx-j6v9"
+        },
+        "pr_task": {
+          "repo": "koxudaxi/datamodel-code-generator",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/2dbe5b579447",
+          "head_dir": ".pr_review/cache/koxudaxi__datamodel-code-generator/src/2ff4a72b4550",
+          "title": "Apply 2ff4a72b4550",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-22",
+          "CWE-200",
+          "CWE-610"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-8359-h9fx-j6v9",
+          "cve_id": "CVE-2026-55389",
+          "cwes": [
+            "CWE-22",
+            "CWE-200",
+            "CWE-610"
+          ],
+          "package": "datamodel-code-generator",
+          "summary": "datamodel-code-generator vulnerable to arbitrary local file read via JSON-Schema `$ref` (`file://` and `../` traversal), bypassing `--no-allow-remote-refs`",
+          "fix_commit": "2ff4a72b4550a2b2069754c5b075b1655067e5fb",
+          "vuln_commit": "2dbe5b5794472a4cad8e9286c942dffda7359816",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-8359-h9fx-j6v9"
+        },
+        "pair_id": "GHSA-8359-h9fx-j6v9"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 50.84532037493773,
+      "error": "",
+      "changed_files": 4,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 4,
+          "duration_s": 15.123,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 4,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-3fcr-jvgp-7f58:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "nessshon/tonapi",
+          "pr_number": 0,
+          "base_sha": "854222b7ee68d3fb7b4d6d899d200f388483bd86",
+          "head_sha": "e46c4a4b907cbb1f290ef73af299b5020ec9de71",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-3fcr-jvgp-7f58"
+        },
+        "pr_task": {
+          "repo": "nessshon/tonapi",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/nessshon__tonapi/src/854222b7ee68",
+          "head_dir": ".pr_review/cache/nessshon__tonapi/src/e46c4a4b907c",
+          "title": "Revert 854222b7ee68",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-287",
+            "file": "pytonapi/webhook/dispatcher.py",
+            "spans": [
+              [
+                109,
+                122
+              ],
+              [
+                143,
+                158
+              ],
+              [
+                181,
+                182
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-287"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-3fcr-jvgp-7f58",
+          "cve_id": "CVE-2026-54635",
+          "cwes": [
+            "CWE-287"
+          ],
+          "package": "pytonapi",
+          "summary": "pytonapi has a Webhook Custom Path Authentication Bypass",
+          "fix_commit": "854222b7ee68d3fb7b4d6d899d200f388483bd86",
+          "vuln_commit": "e46c4a4b907cbb1f290ef73af299b5020ec9de71",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-3fcr-jvgp-7f58"
+        },
+        "pair_id": "GHSA-3fcr-jvgp-7f58"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.542588291922584,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.863,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-3fcr-jvgp-7f58:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "nessshon/tonapi",
+          "pr_number": 0,
+          "base_sha": "e46c4a4b907cbb1f290ef73af299b5020ec9de71",
+          "head_sha": "854222b7ee68d3fb7b4d6d899d200f388483bd86",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-3fcr-jvgp-7f58"
+        },
+        "pr_task": {
+          "repo": "nessshon/tonapi",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/nessshon__tonapi/src/e46c4a4b907c",
+          "head_dir": ".pr_review/cache/nessshon__tonapi/src/854222b7ee68",
+          "title": "Apply 854222b7ee68",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-287"
+        ],
+        "published": "2026-07-28",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-3fcr-jvgp-7f58",
+          "cve_id": "CVE-2026-54635",
+          "cwes": [
+            "CWE-287"
+          ],
+          "package": "pytonapi",
+          "summary": "pytonapi has a Webhook Custom Path Authentication Bypass",
+          "fix_commit": "854222b7ee68d3fb7b4d6d899d200f388483bd86",
+          "vuln_commit": "e46c4a4b907cbb1f290ef73af299b5020ec9de71",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-3fcr-jvgp-7f58"
+        },
+        "pair_id": "GHSA-3fcr-jvgp-7f58"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 6.9483535420149565,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 2.676,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-j6g5-3hh3-pgw8:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aws/bedrock-agentcore-sdk-python",
+          "pr_number": 0,
+          "base_sha": "3c4b4ee6b8730e6313a82c743ac37dbcc1c21cdb",
+          "head_sha": "986801f10f3a8e2482d81f5c50330109355921e3",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-j6g5-3hh3-pgw8"
+        },
+        "pr_task": {
+          "repo": "aws/bedrock-agentcore-sdk-python",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aws__bedrock-agentcore-sdk-python/src/3c4b4ee6b873",
+          "head_dir": ".pr_review/cache/aws__bedrock-agentcore-sdk-python/src/986801f10f3a",
+          "title": "Revert 3c4b4ee6b873",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-88",
+            "file": "src/bedrock_agentcore/tools/code_interpreter_client.py",
+            "spans": [
+              [
+                24,
+                24
+              ],
+              [
+                609,
+                609
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-88"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-j6g5-3hh3-pgw8",
+          "cve_id": "CVE-2026-16796",
+          "cwes": [
+            "CWE-88"
+          ],
+          "package": "bedrock-agentcore",
+          "summary": "AWS Bedrock AgentCore: Improper neutralization of argument delimiters in the Python SDK install_packages()",
+          "fix_commit": "3c4b4ee6b8730e6313a82c743ac37dbcc1c21cdb",
+          "vuln_commit": "986801f10f3a8e2482d81f5c50330109355921e3",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-j6g5-3hh3-pgw8"
+        },
+        "pair_id": "GHSA-j6g5-3hh3-pgw8"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 11.414645958924666,
+      "error": "",
+      "changed_files": 2,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.245,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-j6g5-3hh3-pgw8:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "aws/bedrock-agentcore-sdk-python",
+          "pr_number": 0,
+          "base_sha": "986801f10f3a8e2482d81f5c50330109355921e3",
+          "head_sha": "3c4b4ee6b8730e6313a82c743ac37dbcc1c21cdb",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-j6g5-3hh3-pgw8"
+        },
+        "pr_task": {
+          "repo": "aws/bedrock-agentcore-sdk-python",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/aws__bedrock-agentcore-sdk-python/src/986801f10f3a",
+          "head_dir": ".pr_review/cache/aws__bedrock-agentcore-sdk-python/src/3c4b4ee6b873",
+          "title": "Apply 3c4b4ee6b873",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-88"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-j6g5-3hh3-pgw8",
+          "cve_id": "CVE-2026-16796",
+          "cwes": [
+            "CWE-88"
+          ],
+          "package": "bedrock-agentcore",
+          "summary": "AWS Bedrock AgentCore: Improper neutralization of argument delimiters in the Python SDK install_packages()",
+          "fix_commit": "3c4b4ee6b8730e6313a82c743ac37dbcc1c21cdb",
+          "vuln_commit": "986801f10f3a8e2482d81f5c50330109355921e3",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-j6g5-3hh3-pgw8"
+        },
+        "pair_id": "GHSA-j6g5-3hh3-pgw8"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 11.847298959037289,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 3.472,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-hmj8-5xmh-5573:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "libp2p/py-libp2p",
+          "pr_number": 0,
+          "base_sha": "146ea87d1a20cc7dacf684ecf7c204543be04b37",
+          "head_sha": "5c89d21a05631973c46bf8cfc73842d9cabe94ed",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-hmj8-5xmh-5573"
+        },
+        "pr_task": {
+          "repo": "libp2p/py-libp2p",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/libp2p__py-libp2p/src/146ea87d1a20",
+          "head_dir": ".pr_review/cache/libp2p__py-libp2p/src/5c89d21a0563",
+          "title": "Revert 146ea87d1a20",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "libp2p/stream_muxer/yamux/yamux.py",
+            "spans": [
+              [
+                1096,
+                1096
+              ],
+              [
+                1210,
+                1210
+              ],
+              [
+                1315,
+                1315
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-hmj8-5xmh-5573",
+          "cve_id": "",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "libp2p",
+          "summary": "libp2p: yamux connection DoS via oversized data frame",
+          "fix_commit": "146ea87d1a20cc7dacf684ecf7c204543be04b37",
+          "vuln_commit": "5c89d21a05631973c46bf8cfc73842d9cabe94ed",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-hmj8-5xmh-5573"
+        },
+        "pair_id": "GHSA-hmj8-5xmh-5573"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 20.187986166914925,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 4.315,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-hmj8-5xmh-5573:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "libp2p/py-libp2p",
+          "pr_number": 0,
+          "base_sha": "5c89d21a05631973c46bf8cfc73842d9cabe94ed",
+          "head_sha": "146ea87d1a20cc7dacf684ecf7c204543be04b37",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-hmj8-5xmh-5573"
+        },
+        "pr_task": {
+          "repo": "libp2p/py-libp2p",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/libp2p__py-libp2p/src/5c89d21a0563",
+          "head_dir": ".pr_review/cache/libp2p__py-libp2p/src/146ea87d1a20",
+          "title": "Apply 146ea87d1a20",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-hmj8-5xmh-5573",
+          "cve_id": "",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "libp2p",
+          "summary": "libp2p: yamux connection DoS via oversized data frame",
+          "fix_commit": "146ea87d1a20cc7dacf684ecf7c204543be04b37",
+          "vuln_commit": "5c89d21a05631973c46bf8cfc73842d9cabe94ed",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-hmj8-5xmh-5573"
+        },
+        "pair_id": "GHSA-hmj8-5xmh-5573"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 22.001285457983613,
+      "error": "",
+      "changed_files": 3,
+      "dropped": [],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 2,
+          "duration_s": 4.237,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 2,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-29w2-fq35-v728:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "awslabs/mcp",
+          "pr_number": 0,
+          "base_sha": "ab1bbebc097d674c1cdd4bd75a8f313be18473bf",
+          "head_sha": "70d8c4cb82601a0e48328e34bf7a81b5a6fba073",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-29w2-fq35-v728"
+        },
+        "pr_task": {
+          "repo": "awslabs/mcp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/awslabs__mcp/src/ab1bbebc097d",
+          "head_dir": ".pr_review/cache/awslabs__mcp/src/70d8c4cb8260",
+          "title": "Revert ab1bbebc097d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-455",
+            "file": "src/aws-api-mcp-server/awslabs/aws_api_mcp_server/server.py",
+            "spans": [
+              [
+                37,
+                37
+              ],
+              [
+                39,
+                39
+              ],
+              [
+                322,
+                341
+              ],
+              [
+                444,
+                445
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-455"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-29w2-fq35-v728",
+          "cve_id": "CVE-2026-16584",
+          "cwes": [
+            "CWE-455"
+          ],
+          "package": "awslabs.aws-api-mcp-server",
+          "summary": "AWS API MCP Server Security Policy Bypass via Startup Initialization Failure",
+          "fix_commit": "ab1bbebc097d674c1cdd4bd75a8f313be18473bf",
+          "vuln_commit": "70d8c4cb82601a0e48328e34bf7a81b5a6fba073",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-29w2-fq35-v728"
+        },
+        "pair_id": "GHSA-29w2-fq35-v728"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 58.3988261250779,
+      "error": "",
+      "changed_files": 7,
+      "dropped": [
+        {
+          "path": "src/aws-api-mcp-server/CHANGELOG.md",
+          "hunk_ids": [
+            "c2e8963eb061:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "src/aws-api-mcp-server/uv.lock",
+          "hunk_ids": [
+            "3748b649eaa7:h1"
+          ],
+          "reason": "lockfile_captured",
+          "detail": "churn recorded as a DepDelta; SCA reads that in 3a",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 8,
+          "duration_s": 4.277,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 7,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    },
+    {
+      "case": {
+        "id": "GHSA-29w2-fq35-v728:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "awslabs/mcp",
+          "pr_number": 0,
+          "base_sha": "70d8c4cb82601a0e48328e34bf7a81b5a6fba073",
+          "head_sha": "ab1bbebc097d674c1cdd4bd75a8f313be18473bf",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-29w2-fq35-v728"
+        },
+        "pr_task": {
+          "repo": "awslabs/mcp",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/awslabs__mcp/src/70d8c4cb8260",
+          "head_dir": ".pr_review/cache/awslabs__mcp/src/ab1bbebc097d",
+          "title": "Apply ab1bbebc097d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-455"
+        ],
+        "published": "2026-07-24",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-29w2-fq35-v728",
+          "cve_id": "CVE-2026-16584",
+          "cwes": [
+            "CWE-455"
+          ],
+          "package": "awslabs.aws-api-mcp-server",
+          "summary": "AWS API MCP Server Security Policy Bypass via Startup Initialization Failure",
+          "fix_commit": "ab1bbebc097d674c1cdd4bd75a8f313be18473bf",
+          "vuln_commit": "70d8c4cb82601a0e48328e34bf7a81b5a6fba073",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-29w2-fq35-v728"
+        },
+        "pair_id": "GHSA-29w2-fq35-v728"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "approved",
+      "wall_s": 58.81450704205781,
+      "error": "",
+      "changed_files": 7,
+      "dropped": [
+        {
+          "path": "src/aws-api-mcp-server/CHANGELOG.md",
+          "hunk_ids": [
+            "c2e8963eb061:h1"
+          ],
+          "reason": "docs_only",
+          "detail": "documentation file with no code",
+          "guardrail_considered": true
+        },
+        {
+          "path": "src/aws-api-mcp-server/uv.lock",
+          "hunk_ids": [
+            "3748b649eaa7:h1"
+          ],
+          "reason": "lockfile_captured",
+          "detail": "churn recorded as a DepDelta; SCA reads that in 3a",
+          "guardrail_considered": true
+        }
+      ],
+      "detect": {
+        "semgrep": {
+          "status": "ran",
+          "findings": 0,
+          "results": 0,
+          "mapped_exact": 0,
+          "mapped_heuristic": 0,
+          "mapped_fallback": 0,
+          "unmapped": 0,
+          "heuristic_rules": [],
+          "unmapped_rules": [],
+          "files": 7,
+          "duration_s": 3.885,
+          "baseline_commit": null
+        },
+        "baseline": {
+          "source": "built",
+          "fingerprints": 0,
+          "paths": 8,
+          "tools": [
+            "semgrep"
+          ]
+        }
+      },
+      "model_cost": {}
+    }
+  ]
+}

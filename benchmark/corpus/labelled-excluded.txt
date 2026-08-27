@@ -1,0 +1,36 @@
+# Advisories rejected by hand during curation of the labelled corpus.
+#
+# The automated rules in `benchmark/ghsa.py` reject what can be decided
+# mechanically: no CWE, no fixing commit, a merge parent, a diff too large to
+# read, a fix touching no reviewable Python, a span that is entirely imports or
+# a version bump. What they cannot decide is whether the ground-truth spans
+# actually *localize* the vulnerability. That needs somebody to read the diff,
+# and the outcome lands here.
+#
+# Applied with `--exclude`, so the corpus stays rebuildable from the same
+# command. Editing `labelled.json` directly would be the obvious alternative and
+# would destroy exactly that.
+#
+# Format: `GHSA-id` or `owner/repo@sha`, then `# reason`.
+#
+# Prefer the commit form when the commit is what is unusable. Excluding by
+# advisory id alone was tried first and leaked: several advisories can share one
+# fixing commit, so rejecting one id freed a per-repo slot that the next id on
+# the same commit walked straight into. These two commits came back under four
+# GHSA ids between them.
+#
+# ---------------------------------------------------------------------------
+
+# One bulk refactor apiece, not a localized fix: a shared SSRF guard and a
+# secret-redaction change threaded through 16 and 18 modules respectively. The
+# extracted spans are overwhelmingly the import blocks at the top of each
+# touched module plus whatever code sat next to them, so they mark where the
+# *remediation* was plumbed rather than where the defect was. Scoring against
+# them would count a detector wrong for not flagging an import, and together
+# they would put 34 of the corpus's ~70 ground-truth files into one
+# repository's two commits.
+#
+# Reported as GHSA-c9hr-64h3-gxpc and GHSA-pgwh-4jj4-qm8v (one commit), and
+# GHSA-qq9q-xgm3-xv9g and GHSA-hr7p-wg7r-hg9m (the other).
+flytohub/flyto-core@0a0a528520ec18f5a21f1ddf858a71cc1edfb6e9  # bulk refactor across 16 modules; spans mark plumbing, not the defect
+flytohub/flyto-core@d5f89d71303e3c1e6418d347c5c55fcd173cc8cc  # bulk refactor across 18 modules; spans mark plumbing, not the defect

@@ -1,0 +1,204 @@
+{
+  "dump_version": 2,
+  "corpus_name": "labelled",
+  "selection_criteria": "The 80 most recently published GitHub-reviewed advisories for the pip ecosystem as of 2026-08-07, capped at 2 per source repository and 1 per fixing commit, restricted to those carrying a CWE and a fixing-commit reference into their own repository whose parent is not a merge, whose fix diff is under 400 KB, and which touch reviewable Python source outside tests and docs. Ground-truth spans are the lines the fix removed, excluding spans that are entirely imports, version bumps or comments. Two fixing commits were then excluded by hand as bulk refactors whose spans mark remediation plumbing rather than the defect; the reasons are in benchmark/corpus/labelled-excluded.txt. NOT filtered by CWE: classes no 3a detector can emit are retained and reported as a stratum. Newest-first sampling makes the set post-cutoff for any model evaluated later.",
+  "started_at": "2026-08-26T12:03:12",
+  "wall_s": 6.543444000184536,
+  "code_sha": "439373b",
+  "cold_profiles": false,
+  "arm": "llm-context:low:llm-context-bundles:capture@53be1ef",
+  "model_accounting": {
+    "calls": 2,
+    "cost_usd": 0.134849,
+    "uncached_tokens": 22,
+    "cached_tokens": 36433,
+    "models": [
+      "sonnet"
+    ],
+    "tool_denials": 0,
+    "effort": [
+      "low"
+    ],
+    "cli_version": "2.1.246"
+  },
+  "detector_status": {},
+  "errors": [],
+  "cases": [
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:vuln",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "head_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "title": "Revert afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [
+          {
+            "cwe": "CWE-400",
+            "file": "pypdf/_cmap.py",
+            "spans": [
+              [
+                245,
+                245
+              ],
+              [
+                260,
+                264
+              ],
+              [
+                271,
+                271
+              ],
+              [
+                281,
+                285
+              ],
+              [
+                296,
+                300
+              ]
+            ],
+            "note": "lines the fix removed"
+          }
+        ],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "reverse_fix",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 3.4979400411248207,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.08224,
+        "uncached_tokens": 11,
+        "cached_tokens": 18624,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ],
+        "cli_version": "2.1.246"
+      },
+      "payload": {
+        "diff_chars": 9221,
+        "context_chars": 9506,
+        "message_chars": 18727,
+        "bundles": 2,
+        "slices": 5,
+        "slice_chars": 6727,
+        "groups_without_source": 0
+      }
+    },
+    {
+      "case": {
+        "id": "GHSA-fp3f-mc75-235c:control",
+        "source": "ghsa",
+        "ref": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "base_sha": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "head_sha": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "merged_at": "",
+          "url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pr_task": {
+          "repo": "py-pdf/pypdf",
+          "pr_number": 0,
+          "diff_text": "",
+          "base_dir": ".pr_review/cache/py-pdf__pypdf/src/aa2f37da3562",
+          "head_dir": ".pr_review/cache/py-pdf__pypdf/src/afba8080e19d",
+          "title": "Apply afba8080e19d",
+          "body": ""
+        },
+        "ground_truth": [],
+        "cwe": [
+          "CWE-400"
+        ],
+        "published": "2026-08-07",
+        "language": "python",
+        "advisory": {
+          "ghsa_id": "GHSA-fp3f-mc75-235c",
+          "cve_id": "CVE-2026-71870",
+          "cwes": [
+            "CWE-400"
+          ],
+          "package": "pypdf",
+          "summary": "pypdf: Possible large memory usage for large /ToUnicode streams",
+          "fix_commit": "afba8080e19d29a3c256a742b340995e695b35aa",
+          "vuln_commit": "aa2f37da35627e831d3c97a26d21224f48c1f1ca",
+          "construction": "post_fix_control",
+          "advisory_url": "https://github.com/advisories/GHSA-fp3f-mc75-235c"
+        },
+        "pair_id": "GHSA-fp3f-mc75-235c"
+      },
+      "findings": [],
+      "pre_existing": 0,
+      "verdict": "",
+      "wall_s": 3.0177658749744296,
+      "error": "",
+      "changed_files": 0,
+      "dropped": [],
+      "detect": {},
+      "model_cost": {
+        "calls": 1,
+        "cost_usd": 0.052609,
+        "uncached_tokens": 11,
+        "cached_tokens": 17809,
+        "models": [
+          "sonnet"
+        ],
+        "tool_denials": 0,
+        "effort": [
+          "low"
+        ],
+        "cli_version": "2.1.246"
+      },
+      "payload": {
+        "diff_chars": 9221,
+        "context_chars": 7875,
+        "message_chars": 17096,
+        "bundles": 2,
+        "slices": 5,
+        "slice_chars": 5175,
+        "groups_without_source": 0
+      }
+    }
+  ]
+}

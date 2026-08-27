@@ -1,0 +1,66 @@
+# pr-review configuration (M0 subset; full schema in plan/cross-cutting.md §10).
+# All keys optional — these mirror the built-in defaults.
+vcs:
+  provider: github
+  token_env: GH_TOKEN
+
+models:
+  provider: bedrock
+  roles:                  # tiered routing — the main cost lever
+    planner:  { model_id: anthropic.claude-opus-5,   effort: high }
+    worker:   { model_id: anthropic.claude-sonnet-5, effort: high }
+    verifier: { model_id: anthropic.claude-opus-5,   effort: high }
+    triage:   { model_id: anthropic.claude-haiku-4-5, effort: low }
+    # No `temperature`: current Claude models reject it with a 400. Use `effort`.
+
+budget:
+  max_tokens_per_pr: 400000   # 0 = unlimited
+  gate_fraction: 0.8
+  wall_clock_target_s: 300
+
+languages: [python]
+
+profile:
+  drift_file_pct: 0.25    # full rebuild above this file churn since last full build
+  drift_edge_pct: 0.15    # ... or this call-graph edge churn
+  anchor_globs: []        # empty = use profile/patterns/<lang>.yaml anchor_globs
+  cache_root: .pr_review/cache
+
+detectors:
+  secrets:
+    enabled: true
+    tool: gitleaks        # falls back to the builtin scanner if gitleaks is absent
+  sentinel:
+    enabled: true
+    allowlist_paths: []   # globs scanned but never gated — for repos whose own
+                          # data is prompt text (LLM apps, injection corpora)
+  semgrep:
+    enabled: true
+    ruleset: p/python
+    baseline_aware: true  # --baseline-commit: Semgrep also scopes its own results
+    configs: []           # extra --config values (custom rule packs)
+    timeout_s: 300
+  sca:
+    enabled: true
+    tool: osv-scanner     # queried only for packages this PR adds or changes
+    timeout_s: 300
+  iac:
+    enabled: true
+    tool: checkov         # runs on files Phase 0 flagged is_iac
+    timeout_s: 300
+  structural:
+    enabled: true         # our own CPG; no binary, but needs --head-dir
+
+# Base-commit baseline for delta scoping (cross-cutting §5). Disabling it costs
+# precision, not correctness: scoping falls back to hunk overlap and says so.
+baseline:
+  enabled: true
+  cache: true
+
+gate:
+  severity_floor: high    # flag only on >= HIGH ...
+  confidence_floor: 6     # ... and >= confidence 6
+  comment_threshold: medium
+
+output:
+  formats: [markdown, sarif, json]

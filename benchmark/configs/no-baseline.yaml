@@ -1,0 +1,22 @@
+# ARM 2c — the pipeline without a base-tree scan.
+#
+# The middle rung of the delta-scoping ladder (§14.46). `baseline.enabled: false`
+# makes `detect/runner._baseline` return None, so `findings/delta.py` falls back
+# to hunk overlap: a finding counts as introduced when it sits in a region this
+# PR edited. `delta.py` says so in `result.notes` rather than degrading quietly.
+#
+# THIS IS NOT A HYPOTHETICAL CONFIGURATION. It is what the tool does whenever no
+# base checkout is available -- the `--no-checkout` flag, an offline `--diff-file`
+# run, and the whole M0 thread. So the number this produces is the tool's real
+# behaviour in a real mode, not an ablation invented for a scorecard.
+#
+# Nothing else changes. Every detector still runs, normalization and dedup are
+# untouched, and Phase 1 profiling still happens -- the single variable against
+# the 2026-08-08 negative baseline is whether the base tree was scanned.
+#
+# Note one thing this does NOT isolate: `detectors.semgrep.baseline_aware` still
+# passes `--baseline-commit`, so Semgrep continues to scope its own results.
+# That makes this an upper bound on how well hunk-only scoping does, and the
+# scorecard's derived "no scoping" row is the other side of that bound.
+baseline:
+  enabled: false
