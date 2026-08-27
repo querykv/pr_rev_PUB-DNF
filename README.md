@@ -316,11 +316,6 @@ benchmark/
   corpus/           three pinned corpora, by repo + PR + both shas
   results/          43 stored runs, each with its scorecard and run.json
   prompts/          the LLM-baseline prompt, as a committed artifact
-cap_engine/         SEPARATE REPOSITORY, restricted licence, gitignored, never edited
+cap_engine/         SEPARATE REPOSITORY
 tests/              894 tests
 ```
-
-> **`cap_engine/` is not part of this repository.** It is a separate project under a restricted
-> licence, present on disk and excluded from version control. It is never edited; every
-> integration is an override in `pr_review/models/framework.py` or a shim in
-> `pr_review/cap_compat.py`, so it can be re-synced or replaced without conflicts.
